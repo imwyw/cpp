@@ -4,4 +4,4 @@
 
 * [基础]
     * [HelloWorld](./BASE/Hello.md)
-    * [基本](./BASE/basic.md)
+    * [基本](./BASE/Basic.md)
