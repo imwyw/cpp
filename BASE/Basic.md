@@ -108,11 +108,59 @@ int main()
 }
 ```
 
+## 数组
+C++ 支持数组数据结构，它可以存储一个固定大小的相同类型元素的顺序集合。
+数组是用来存储一系列数据，但它往往被认为是一系列相同类型的变量。
+```cpp
+type arrayName [ arraySize ];
+float v[3];// 一个数组，包含三个浮点数：v[0],v[1],v[2]
+char* a[32];//一个数组，包含32个到char的指针：a[0]...a[31]
+```
+数组元素的个数，即数组的界，必须是一个常量表达式。
+如果需要可变化的界，请使用向量vector。
+
+循环输出一个数组：
+```cpp
+#include "stdafx.h"
+#include "string"
+#include "iostream"
+using namespace std;
+
+int main()
+{
+	const int LEN = 5;
+	int a[LEN] = { 0,2,4 };//等价于 { 0,2,4,0,0 }
+
+	//以数组下标方式进行遍历
+	for (int i = 0; i < LEN; i++)
+	{
+		cout << "第" << i << "个元素：" << a[i] << endl;
+	}
+
+	//以下打印的都是数组的地址，第一个元素的内存地址，所以简写为数组a即可
+	cout << "a:" << a << endl;
+	cout << "&a:" << &a << endl;
+	cout << "&a[0]:" << &a[0] << endl;
+
+	//定义指针为数组地址
+	int* pa = a;
+
+	for (int i = 0; i < LEN; i++)
+	{
+		cout << "指针递增，地址：" << pa << "，元素：" << *pa << endl;
+		pa++;
+	}
+
+	system("pause");
+
+	return 0;
+}
+```
+
 ## 指针
 指针是一个变量，其值为另一个变量的地址，即，内存位置的直接地址。
 
 就像其他变量或常量一样，您必须在使用指针存储其他变量地址之前，对其进行声明。
-
 
 定义时, 其`*`号的位置可以靠左( `int* pa;` ), 居中( `int * pa;` )或靠右( `int *pa;` ), 具体使用哪种形式可根据个人习惯。
 
@@ -147,12 +195,173 @@ int main()
 	string** pp = &p;
 
 	cout << "======================指针的指针========================" << endl;
-	cout << "pp:" << pp << "指针p的地址，等同于&p" << endl;
+	cout << "pp:" << pp << " 指针p的地址，等同于&p" << endl;
 	cout << "*pp:" << *pp << " 间接引用所指的变量 即zhName" << endl;
-	cout << "&pp:" << &pp << "指针的指针，它的地址 " << endl;
+	cout << "&pp:" << &pp << " 指针的指针，它的地址 " << endl;
 
 	system("pause");
 
 	return 0;
+}
+```
+
+### NULL指针
+NULL 指针是一个定义在标准库中的值为零的常量。
+```cpp
+#include "stdafx.h"
+#include "string"
+#include "iostream"
+using namespace std;
+
+int main()
+{
+	int *pa = NULL;
+
+	string *pstr = NULL;
+
+	cout << "pa指向的地址：" << pa << endl;
+	cout << "pstr指向的地址：" << pstr << endl;
+
+	system("pause");
+
+	return 0;
+}
+
+```
+
+## 函数
+```cpp
+#include "stdafx.h"
+#include "string"
+#include "iostream"
+using namespace std;
+
+//函数声明
+void SayHello(string name);
+
+int main()
+{
+	SayHello("Jack Ma");
+
+	system("pause");
+
+	return 0;
+}
+
+void SayHello(string name) {
+	cout << "Hello " << name << endl;
+}
+```
+
+* 传值调用
+该方法把参数的实际值复制给函数的形式参数。在这种情况下，修改函数内的形式参数对实际参数没有影响。
+实际传递的是值的副本。
+
+* 指针调用
+该方法把参数的地址复制给形式参数。在函数内，该地址用于访问调用中要用到的实际参数。这意味着，修改形式参数会影响实际参数。
+
+* 引用调用
+该方法把参数的引用复制给形式参数。在函数内，该引用用于访问调用中要用到的实际参数。这意味着，修改形式参数会影响实际参数。
+
+```cpp
+#include "stdafx.h"
+#include "string"
+#include "iostream"
+using namespace std;
+
+//值传递
+void Swap(int a, int b);
+
+//指针传递
+void Swap(int* a, int* b);
+
+//引用传递
+void SwapRef(int& a, int& b);
+
+int main()
+{
+	int a = 1, b = 2;
+	Swap(a, b);
+
+	cout << "值传递，a:" << a << ",b:" << b << endl;//a:1,b:2
+
+	Swap(&a, &b);
+
+	cout << "指针传递，a:" << a << ",b:" << b << endl;//a:2,b:1
+
+	SwapRef(a, b);
+
+	cout << "引用传递，a:" << a << ",b:" << b << endl;//a:1,b:2
+
+	system("pause");
+
+	return 0;
+}
+
+void Swap(int a, int b) {
+	int temp = a;
+	a = b;
+	b = temp;
+}
+
+void Swap(int* a, int* b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void SwapRef(int& a, int& b) {
+	int temp = a;
+	a = b;
+	b = temp;
+}
+```
+
+## 引用
+引用变量是一个别名，也就是说，它是某个已存在变量的另一个名字。
+一旦把引用初始化为某个变量，就可以使用该引用名称或变量名称来指向变量。
+### 引用vs指针
+引用很容易与指针混淆，它们之间有三个主要的不同：
+* 不存在空引用。引用必须连接到一块合法的内存。
+* 一旦引用被初始化为一个对象，就不能被指向到另一个对象。指针可以在任何时候指向到另一个对象。
+* 引用必须在创建时被初始化。指针可以在任何时间被初始化。
+
+```cpp
+//操作name和rName的效果是一致的
+string name = "JackMa";
+string& rName = name;
+```
+
+### 引用作为函数返回值
+C++ 函数可以返回一个引用，方式与返回一个指针类似。
+当函数返回一个引用时，则返回一个指向返回值的隐式指针。这样，函数就可以放在赋值语句的左边。
+```cpp
+#include "stdafx.h"
+#include "string"
+#include "iostream"
+using namespace std;
+
+double& SetValue(int i, double arr[]);
+
+int main()
+{
+	const int LEN = 5;
+	double a[LEN] = { 1,2,3 };
+
+	SetValue(3, a) = 3.14;
+
+	for (int i = 0; i < LEN; i++)
+	{
+		cout << i << "###" << a[i] << endl;
+	}
+
+	system("pause");
+
+	return 0;
+}
+
+double& SetValue(int i, double arr[]) {
+	//注意，return时不需要&符号
+	return arr[i];
 }
 ```
