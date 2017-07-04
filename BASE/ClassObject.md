@@ -342,3 +342,59 @@ void GetStudentHeap() {
 }
 ```
 
+## 对象数组
+```cpp
+class Student {
+public:
+	Student();
+	~Student();
+	string Name;
+	int Age;
+};
+
+Student::Student()
+{
+}
+
+Student::~Student()
+{
+}
+
+void main() {
+	const int LEN = 3;
+
+	//栈上 数组
+	Student stus[LEN];
+	stus[0].Name = "赵大力";
+	stus[0].Age = 1;
+
+	//堆上 数组
+	Student *pStus = new Student[LEN];
+
+	/*第一个元素*/
+	pStus->Name = "赵二狗";
+	pStus[0].Age = 1;
+
+	/*第二个元素*/
+	pStus++;
+	pStus->Name = "钱多多";
+	pStus[0].Age = 2;
+
+	for (int i = 0; i < LEN; i++)
+	{
+		cout << "第" << i << "个元素：" << stus[i].Name << endl;
+	}
+
+	//指针方式遍历就比较麻烦了，先让指针指向第一个元素，通过下标访问，不再改变指针
+	pStus--;
+	for (int i = 0; i < LEN; i++)
+	{
+		cout << "指针：第" << i << "个元素：" << pStus[i].Name << endl;
+	}
+
+	delete[]pStus;
+	pStus = NULL;
+
+	system("pause");
+}
+```
