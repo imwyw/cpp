@@ -233,12 +233,6 @@ void main() {
 
 ## 析构函数
 ```cpp
-#include "stdafx.h"
-#include <iostream>
-#include "string"
-
-using namespace std;
-
 class Student
 {
 public:
@@ -358,6 +352,7 @@ Student::Student()
 
 Student::~Student()
 {
+	cout << "释放。。。" << endl;
 }
 
 void main() {
@@ -392,9 +387,107 @@ void main() {
 		cout << "指针：第" << i << "个元素：" << pStus[i].Name << endl;
 	}
 
+	//会调用三次析构，申请的内存都会释放
 	delete[]pStus;
 	pStus = NULL;
 
 	system("pause");
 }
 ```
+
+## 拷贝
+### 浅拷贝
+### 深拷贝
+```cpp
+//////////////////////////////////////////////////////////////////////////
+class Array
+{
+public:
+	Array(int cnt);
+
+	void printAddr();
+	int *m_pArr;
+};
+
+Array::Array(int cnt) {
+	m_pArr = new int[cnt];
+}
+
+void Array::printAddr() {
+	cout << m_pArr << endl;
+}
+//////////////////////////////////////////////////////////////////////////
+class ArrayDeep
+{
+public:
+	ArrayDeep(int cnt);
+	ArrayDeep(const ArrayDeep &arr);
+	~ArrayDeep();
+
+	void setCount(int cnt);
+	int getCount();
+
+	void printAddr();
+private:
+	int m_iCount;
+	int *m_pArr;
+};
+
+//默认构造
+ArrayDeep::ArrayDeep(int cnt)
+{
+	m_iCount = cnt;
+	m_pArr = new int[m_iCount];
+}
+
+//拷贝构造
+ArrayDeep::ArrayDeep(const ArrayDeep & arr)
+{
+	m_iCount = arr.m_iCount;
+	m_pArr = new int[m_iCount];
+	for (int i = 0; i < m_iCount; i++)
+	{
+		m_pArr[i] = arr.m_pArr[i];
+	}
+}
+
+ArrayDeep::~ArrayDeep()
+{
+}
+
+void ArrayDeep::setCount(int cnt)
+{
+	m_iCount = cnt;
+}
+
+int ArrayDeep::getCount()
+{
+	return m_iCount;
+}
+
+void ArrayDeep::printAddr()
+{
+	cout << "m_pArr的地址：" << m_pArr << endl;
+}
+//////////////////////////////////////////////////////////////////////////
+void main() {
+	Array pArr1(3);
+	/*浅拷贝，指针地址指向同一块内存地址*/
+	Array pArr2 = pArr1;
+
+	cout << "====================浅拷贝====================" << endl;
+	pArr1.printAddr();
+	pArr2.printAddr();
+
+	ArrayDeep pArrDeep1(3);
+	/*深拷贝*/
+	ArrayDeep pArrDeep2(pArrDeep1);
+
+	cout << "====================深拷贝====================" << endl;
+	pArrDeep1.printAddr();
+	pArrDeep2.printAddr();
+
+	system("pause");
+}
+```
+
