@@ -359,7 +359,7 @@ int main()
 
 	for (int i = 0; i < LEN; i++)
 	{
-		cout << i << "###" << a[i] << endl;
+		cout << i << "===========" << a[i] << endl;
 	}
 
 	system("pause");
