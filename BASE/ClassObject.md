@@ -491,3 +491,52 @@ void main() {
 }
 ```
 
+## 类与类的关系
+
+## NULL、0、nullptr
+```cpp
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person {
+public:
+	string name;
+};
+
+class Helper {
+public:
+	void static say(Person *per);
+	void static say(int x);
+};
+
+void Helper::say(Person *per)
+{
+	string res = "调用say(Person *per)==========" + (nullptr == per ? "" : per->name);
+	cout << res << endl;
+}
+
+void Helper::say(int x)
+{
+	cout << "调用say(int x)============，在此不应该被调用。。。" << x << endl;
+}
+
+int main()
+{
+	Person *zhang = new Person();
+	zhang->name = "张三";
+
+	Helper::say(zhang);
+
+	//在项目生产环境中很可能是需要调用 say(Person *per); 这个重载方法，实际调用的是另一个重载
+	Helper::say(NULL);//等同于 Helper::say(0);
+
+	//所以建议使用 nullptr
+	Helper::say(nullptr);
+
+	return 0;
+}
+```
+
+[史上最明白的 NULL、0、nullptr 区别分析](http://www.cnblogs.com/porter/p/3611718.html)
