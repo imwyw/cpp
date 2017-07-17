@@ -54,10 +54,11 @@ using namespace CLRHelloWorld;
 //单线程特性，有些组件要求单线程
 [STAThreadAttribute]
 int main(array<System::String^>^args) {
-	//启用可视化界面，不然会很难看
+	// 在创建任何控件之前启用 Windows XP 可视化效果
 	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false); 
 
-	//创建一个窗体，并进入消息循环
+	//创建主窗口并运行它
 	Application::Run(gcnew MainForm());
 	return 0;
 }
