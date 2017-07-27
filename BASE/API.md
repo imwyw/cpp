@@ -25,10 +25,16 @@ ifstream:硬盘到内存
 
 fstream open方法：
 `void open( const char *filename,ios_base::openmode mode = ios_base::in|ios_base::out );`
-* ios::out输出数据覆盖现有文件
-* ios::in打开文件以输入
-* ios::app输出数据添加之现有文件末尾
-* ios::ate打开文件并移动文件指针至开始
+
+ios_base打开模式：
+
+模式标志 | 描述
+-----|---
+ios::app | 追加模式。所有写入都追加到文件末尾。
+ios::ate | 文件打开后定位到文件末尾。
+ios::in | 打开文件用于读取。
+ios::out | 打开文件用于写入。
+ios::trunc | 如果该文件已经存在，其内容将在打开文件之前被截断，即把文件长度设为 0。
 
 ```cpp
 #include "stdafx.h"

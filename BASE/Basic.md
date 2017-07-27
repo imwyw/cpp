@@ -381,6 +381,19 @@ double& SetValue(int i, double arr[]) {
 }
 ```
 
+### 函数模板
+函数模板可以用来创建一个通用功能的函数，以支持多种不同形参，简化重载函数的设计
+定义如下：
+```cpp
+template<模板参数表>返回类型 函数名(形式参数表)
+    {……;}//函数体
+```
+例如：
+```cpp
+template <typename T> T min(T a, T b)
+    { return ( a < b ) ? a : b; }
+```
+
 ## const
 ### const与基本数据类型
 ```cpp
