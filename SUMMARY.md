@@ -7,6 +7,8 @@
     * [基本](./BASE/Basic.md)
     * [类和对象](./BASE/ClassObject.md)
     * [API](./BASE/API.md)
+    * [FAQ](./BASE/FAQ.md)
+
 * [CLR]
     * [项目构建](./CLR/CLR_Hello.md)
     
