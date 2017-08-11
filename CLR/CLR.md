@@ -78,3 +78,8 @@ public:
 	}
 };
 ```
+注意stdafx.h头文件中需要添加引用：
+```cpp
+#include <string>
+using namespace std;
+```
