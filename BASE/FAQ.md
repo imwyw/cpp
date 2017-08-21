@@ -6,3 +6,7 @@ error LNK1123:转换到 COFF 期间失败：文件无效或损坏
 [转换到 COFF 期间失败: 文件无效或损坏](http://blog.csdn.net/zengraoli/article/details/39081901)
 
 [LNK1123: 转换到 COFF 期间失败: 文件无效或损坏](http://www.cnblogs.com/newpanderking/articles/3372969.html)
+
+## 关于stdafx.h中的引用
+
+stdafx中

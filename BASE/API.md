@@ -68,6 +68,40 @@ int _tmain(int argc, _TCHAR* argv[])
 	return 0;
 }
 ```
+```cpp
+//二进制读写
+void EmpMenu::saveData()
+{
+	//创建输出流
+	ofstream ofs;
+	//二进制方式打开
+	ofs.open("dataEmp.bin",ios::binary);
+	for (int i=0;i<30;i++)
+	{
+		if (empArr[i]==nullptr)
+		{
+			break;
+		}
+		ofs.write((char *)empArr[i],sizeof(Employee));
+	}
+	ofs.close();
+	cout<<"文件保存成功!"<<endl;
+}
 
-### fstream
-打开文件供读写
+void EmpMenu::loadData()
+{
+	//创建输入流
+	ifstream ifs;
+	//二进制读取
+	ifs.open("dataEmp.bin",ios::binary);
+	Employee *emp = new Employee();
+	int i = 0;
+	while (ifs.read((char *)emp,sizeof(Employee)))
+	{
+		empArr[i++] = emp;
+		emp = new Employee();
+	}
+	ifs.close();
+	cout<<"读取数据成功!"<<endl;
+}
+```
