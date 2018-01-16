@@ -1,5 +1,19 @@
+<!-- TOC -->
+
+- [API](#api)
+    - [iostream](#iostream)
+        - [cout](#cout)
+        - [cin](#cin)
+    - [fstream](#fstream)
+        - [ofstream/ifstream](#ofstreamifstream)
+
+<!-- /TOC -->
+
+<a id="markdown-api" name="api"></a>
 # API
+<a id="markdown-iostream" name="iostream"></a>
 ## iostream
+<a id="markdown-cout" name="cout"></a>
 ### cout
 `<<` 插入器，向流输出数据
 ```cpp
@@ -8,6 +22,7 @@ using namespace std;
 
 out<<表达式1<<表达式2<<……<<表达式n;
 ```
+<a id="markdown-cin" name="cin"></a>
 ### cin
 `>>` 析取器，从流中输入数据
 ```cpp
@@ -17,7 +32,9 @@ using namespace std;
 cin>>变量1>>变量2>>……>>变量n;
 ```
 
+<a id="markdown-fstream" name="fstream"></a>
 ## fstream
+<a id="markdown-ofstreamifstream" name="ofstreamifstream"></a>
 ### ofstream/ifstream
 ofstream:内存到硬盘
 
