@@ -5,6 +5,8 @@
         - [typedef 声明](#typedef-声明)
         - [枚举类型](#枚举类型)
         - [枚举拓展](#枚举拓展)
+    - [变量类型](#变量类型)
+        - [布尔值](#布尔值)
     - [数组](#数组)
     - [指针](#指针)
         - [NULL指针](#null指针)
@@ -96,8 +98,8 @@ newInt width = 100;//等价于 int width = 100;
 创建枚举，需要使用关键字 enum。枚举类型的一般形式为：
 ```cpp
 enum 枚举名{ 
-     标识符[=整型常数], 
-     标识符[=整型常数], 
+     标识符[=整型常数],
+     标识符[=整型常数],
 ... 
     标识符[=整型常数]
 } 枚举变量;
@@ -108,7 +110,7 @@ enum 枚举名{
 
 ```cpp
 #include "stdafx.h"
-#include "iostream"
+#include <iostream>
 using namespace std;
 
 enum Weeks
@@ -146,6 +148,18 @@ int main()
 vc++11新特性
 ```cpp
 enum class MyEnum{};
+```
+
+<a id="markdown-变量类型" name="变量类型"></a>
+## 变量类型
+
+<a id="markdown-布尔值" name="布尔值"></a>
+### 布尔值
+这里有一点需要特别说明下，和java、C#等编程语言不一样的地方在于，数值也可以作为布尔值判断，即0为false，非0为true。
+
+对于以下代码，在C++中是成立的
+```cpp
+if(1){}
 ```
 
 <a id="markdown-数组" name="数组"></a>
