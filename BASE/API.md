@@ -4,6 +4,7 @@
     - [iostream](#iostream)
         - [cout](#cout)
         - [cin](#cin)
+        - [getline](#getline)
     - [fstream](#fstream)
         - [ofstream/ifstream](#ofstreamifstream)
 
@@ -20,7 +21,7 @@
 #include <iostream>
 using namespace std;
 
-out<<表达式1<<表达式2<<……<<表达式n;
+cout << 表达式1 << 表达式2 << …… << 表达式n;
 ```
 <a id="markdown-cin" name="cin"></a>
 ### cin
@@ -29,7 +30,29 @@ out<<表达式1<<表达式2<<……<<表达式n;
 #include <iostream>
 using namespace std;
 
-cin>>变量1>>变量2>>……>>变量n;
+cin >> 变量1 >> 变量2 >> …… >> 变量n;
+```
+
+用于输入一个数字或者是一个字符串(无特殊字符，如空格等)。当cin接收一个字符串会过滤掉不可见字符，遇“空格”、“TAB”、“回车”就结束了。
+
+<a id="markdown-getline" name="getline"></a>
+### getline
+接收一个字符串，可以接收空格、制表符等并输出。从输入流中读入字符，存到string变量，直到出现以下情况为止：
+1. 读入了文件结束标志
+2. 读到一个新行
+3. 达到字符串的最大长度
+如果getline没有读入字符，将返回false，这一点可用于判断文件是否结束。
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void main() {
+	string name;
+	getline(cin, name);
+}
 ```
 
 <a id="markdown-fstream" name="fstream"></a>
