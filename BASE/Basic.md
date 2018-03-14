@@ -32,6 +32,9 @@
     - [队列](#队列)
         - [普通队列](#普通队列)
         - [环形队列](#环形队列)
+    - [结构体](#结构体)
+        - [定义和声明](#定义和声明)
+        - [结构体与类的区别](#结构体与类的区别)
 
 <!-- /TOC -->
 
@@ -595,3 +598,56 @@ void f2 ()
 ### 普通队列
 <a id="markdown-环形队列" name="环形队列"></a>
 ### 环形队列
+
+<a id="markdown-结构体" name="结构体"></a>
+## 结构体
+在C语言中，结构体不能包含函数。
+在面向对象的程序设计中，对象具有状态（属性）和行为，状态保存在成员变量中，行为通过成员方法（函数）来实现。
+C语言中的结构体只能描述一个对象的状态，不能描述一个对象的行为。
+在C++中，考虑到C语言到C++语言过渡的连续性，对结构体进行了扩展，C++的结构体可以包含函数，这样，C++的结构体也具有类的功能，与class不同的是，结构体包含的函数默认为public，而不是private。 
+
+<a id="markdown-定义和声明" name="定义和声明"></a>
+### 定义和声明
+```cpp
+struct tag 
+{
+    member-list
+}variable-list;
+/*
+注：struct为结构体关键字；
+   tag为结构体的标志，结构体名称；
+   member-list为结构体成员变量及成员函数列表，其必须列出其所有成员；
+   variable-list为此结构体声明的变量，也可以在调用前进行声明；
+*/
+```
+
+定义和示例：
+```cpp
+//定义一个结构体 Student
+struct Student {
+	char firstName[20];
+	string lastName;
+	void SayHello() {
+		cout << firstName << lastName << endl;
+	}
+};
+
+void main()
+{
+	Student stu1;
+	stu1.lastName = "san";
+	//strcpy_s 值的拷贝，不能简单的使用=赋值
+	strcpy_s(stu1.firstName, "zhang");
+
+	stu1.SayHello();
+}
+```
+
+
+<a id="markdown-结构体与类的区别" name="结构体与类的区别"></a>
+### 结构体与类的区别
+C++中的结构体与类的区别： 
+1. class中默认的成员访问权限是private的，而struct中则是public的。 
+2. class继承默认是private继承，而从struct继承默认是public继承。
+
+参考引用：[C++中的结构体](http://blog.csdn.net/cainv89/article/details/48447225)

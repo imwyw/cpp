@@ -13,6 +13,9 @@
         - [浅拷贝](#浅拷贝)
         - [深拷贝](#深拷贝)
     - [类与类的关系](#类与类的关系)
+        - [依赖](#依赖)
+        - [聚合](#聚合)
+        - [继承](#继承)
     - [NULL、0、nullptr](#null0nullptr)
 
 <!-- /TOC -->
@@ -524,6 +527,16 @@ void main() {
 
 <a id="markdown-类与类的关系" name="类与类的关系"></a>
 ## 类与类的关系
+
+<a id="markdown-依赖" name="依赖"></a>
+### 依赖
+
+<a id="markdown-聚合" name="聚合"></a>
+### 聚合
+
+<a id="markdown-继承" name="继承"></a>
+### 继承
+
 
 <a id="markdown-null0nullptr" name="null0nullptr"></a>
 ## NULL、0、nullptr
