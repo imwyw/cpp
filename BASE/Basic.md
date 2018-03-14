@@ -8,8 +8,11 @@
     - [变量类型](#变量类型)
         - [布尔值](#布尔值)
     - [数组](#数组)
+        - [一维数组](#一维数组)
+        - [多维数组](#多维数组)
+        - [指向数组的指针](#指向数组的指针)
     - [指针](#指针)
-        - [NULL指针](#null指针)
+        - [NULL指针和nullptr指针](#null指针和nullptr指针)
     - [函数](#函数)
         - [调用方式](#调用方式)
         - [内联函数](#内联函数)
@@ -21,6 +24,11 @@
         - [const与基本数据类型](#const与基本数据类型)
         - [const与指针类型](#const与指针类型)
         - [const与引用类型](#const与引用类型)
+        - [const与宏定义#define](#const与宏定义define)
+            - [类型和安全检查方面](#类型和安全检查方面)
+            - [编译器处理不同](#编译器处理不同)
+            - [存储方式不同](#存储方式不同)
+            - [定义域不同](#定义域不同)
     - [队列](#队列)
         - [普通队列](#普通队列)
         - [环形队列](#环形队列)
@@ -155,17 +163,24 @@ enum class MyEnum{};
 
 <a id="markdown-布尔值" name="布尔值"></a>
 ### 布尔值
-这里有一点需要特别说明下，和java、C#等编程语言不一样的地方在于，数值也可以作为布尔值判断，即0为false，非0为true。
+这里有一点需要特别说明下，和java、C#等编程语言不一样的地方在于，数值也可以作为布尔值判断，即0为false，非0为true，也就是1和-1都为真值。
 
 对于以下代码，在C++中是成立的
 ```cpp
 if(1){}
+if(-1){}
 ```
 
 <a id="markdown-数组" name="数组"></a>
 ## 数组
-C++ 支持数组数据结构，它可以存储一个固定大小的相同类型元素的顺序集合。
+C++ 支持数组数据结构，它可以存储一数组数据结构，它可以存储一个固定大小的相同类型元素的顺序集合。
 数组是用来存储一系列数据，但它往往被认为是一系列相同类型的变量。
+
+所有的数组都是由连续的内存位置组成。最低的地址对应第一个元素，最高的地址对应最后一个元素。
+
+<a id="markdown-一维数组" name="一维数组"></a>
+### 一维数组
+
 ```cpp
 type arrayName [ arraySize ];
 float v[3];// 一个数组，包含三个浮点数：v[0],v[1],v[2]
@@ -177,8 +192,8 @@ char* a[32];//一个数组，包含32个到char的指针：a[0]...a[31]
 循环输出一个数组：
 ```cpp
 #include "stdafx.h"
-#include "string"
-#include "iostream"
+#include <string>
+#include <iostream>
 using namespace std;
 
 int main()
@@ -212,6 +227,43 @@ int main()
 }
 ```
 
+<a id="markdown-多维数组" name="多维数组"></a>
+### 多维数组
+多维数组的声明形式一般如下：
+`type name[size1][size2]...[sizeN];`
+
+以二维数组示例，一个二维数组可以被认为是一个带有 x 行和 y 列的表格。下面是一个二维数组，包含 3 行和 4 列：
+
+![](../assets/BASE/two_dimensional_arrays.jpg)
+
+因此，数组中的每个元素是使用形式为 a[ i , j ] 的元素名称来标识的，其中 a 是数组名称，i 和 j 是唯一标识 a 中每个元素的下标。
+
+```cpp
+//3行4列
+int a[3][4] = {
+	{0, 1, 2, 3} ,   /*  初始化索引号为 0 的行 */
+	{4, 5, 6, 7} ,   /*  初始化索引号为 1 的行 */
+	{8, 9, 10, 11}   /*  初始化索引号为 2 的行 */
+};
+
+int a[3][4] = {0,1,2,3,4,5,6,7,8,9,10,11};//同上面的初始化方法
+```
+
+<a id="markdown-指向数组的指针" name="指向数组的指针"></a>
+### 指向数组的指针
+可以学习完下面指针章节后，再来阅读此小结。
+
+数组名是一个指向数组中第一个元素的常量指针。因此，在下面的声明中：`double balance[50];`
+
+balance 是一个指向 &balance[0] 的指针，即数组 balance 的第一个元素的地址。因此，下面的程序片段把 p 赋值为 balance 的第一个元素的地址：
+
+```
+double *p;
+double balance[10];
+
+p = balance;
+```
+
 <a id="markdown-指针" name="指针"></a>
 ## 指针
 指针是一个变量，其值为另一个变量的地址，即，内存位置的直接地址。
@@ -226,8 +278,8 @@ int main()
 
 ```cpp
 #include "stdafx.h"
-#include "string"
-#include "iostream"
+#include <string>
+#include <iostream>
 using namespace std;
 
 int main()
@@ -261,13 +313,13 @@ int main()
 }
 ```
 
-<a id="markdown-null指针" name="null指针"></a>
-### NULL指针
+<a id="markdown-null指针和nullptr指针" name="null指针和nullptr指针"></a>
+### NULL指针和nullptr指针
 NULL 指针是一个定义在标准库中的值为零的常量。
 ```cpp
 #include "stdafx.h"
-#include "string"
-#include "iostream"
+#include <string>
+#include <iostream>
 using namespace std;
 
 int main()
@@ -286,12 +338,14 @@ int main()
 
 ```
 
+nullptr是c++11中新增的特性，同样表示空指针，建议使用nullptr，因为在c++ null和0在函数重载时容易发生混淆。
+
 <a id="markdown-函数" name="函数"></a>
 ## 函数
 ```cpp
 #include "stdafx.h"
-#include "string"
-#include "iostream"
+#include <string>
+#include <iostream>
 using namespace std;
 
 //函数声明
@@ -324,8 +378,8 @@ void SayHello(string name) {
 
 ```cpp
 #include "stdafx.h"
-#include "string"
-#include "iostream"
+#include <string>
+#include <iostream>
 using namespace std;
 
 //值传递
@@ -407,8 +461,8 @@ C++ 函数可以返回一个引用，方式与返回一个指针类似。
 当函数返回一个引用时，则返回一个指向返回值的隐式指针。这样，函数就可以放在赋值语句的左边。
 ```cpp
 #include "stdafx.h"
-#include "string"
-#include "iostream"
+#include <string>
+#include <iostream>
 using namespace std;
 
 double& SetValue(int i, double arr[]);
@@ -452,11 +506,17 @@ template <typename T> T min(T a, T b)
 
 <a id="markdown-const" name="const"></a>
 ## const
+
 <a id="markdown-const与基本数据类型" name="const与基本数据类型"></a>
 ### const与基本数据类型
 ```cpp
 const int a = 5;//等价于 int const a = 5;
 a = 1;//错误，无法修改
+```
+
+通常，我们习惯将常量定义为大写，比如定义π的近似值。
+```cpp
+const double PI = 3.1415926;
 ```
 
 <a id="markdown-const与指针类型" name="const与指针类型"></a>
@@ -489,6 +549,45 @@ const int &b = a;
 a = 2;
 b = 4;//错误，无法通过引用（别名）改变变量的值
 ```
+
+<a id="markdown-const与宏定义define" name="const与宏定义define"></a>
+### const与宏定义#define
+<a id="markdown-类型和安全检查方面" name="类型和安全检查方面"></a>
+#### 类型和安全检查方面
+
+宏定义是字符替换，没有数据类型的区别，同时这种替换没有类型安全检查，可能产生边际效应等错误；
+
+const常量是常量的声明，有类型区别，需要在编译阶段进行类型检查
+
+<a id="markdown-编译器处理不同" name="编译器处理不同"></a>
+#### 编译器处理不同
+宏定义是一个"编译时"概念，在预处理阶段展开，不能对宏定义进行调试，生命周期结束与编译时期；
+
+const常量是一个"运行时"概念，在程序运行使用，类似于一个只读行数据
+
+<a id="markdown-存储方式不同" name="存储方式不同"></a>
+#### 存储方式不同
+宏定义是直接替换，不会分配内存，存储在程序的代码段中；
+
+const常量需要进行内存分配，存储在程序的数据段中
+
+<a id="markdown-定义域不同" name="定义域不同"></a>
+#### 定义域不同
+```cpp
+void f1 ()
+{
+    #define N 12
+    const int n 12;
+}
+void f2 ()
+{
+    cout<<N <<endl; //正确，N已经定义过，不受定义域限制
+    cout<<n <<endl; //错误，n定义域只在f1函数中
+}
+```
+
+参考引用：
+[#define和const](http://www.cnblogs.com/scut-linmaojiang/p/4722338.html)
 
 <a id="markdown-队列" name="队列"></a>
 ## 队列
