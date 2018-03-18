@@ -15,6 +15,10 @@
         - [NULL指针和nullptr指针](#null指针和nullptr指针)
     - [函数](#函数)
         - [调用方式](#调用方式)
+            - [值传递](#值传递)
+            - [指针传递](#指针传递)
+            - [引用传递](#引用传递)
+            - [变量交换实例](#变量交换实例)
         - [内联函数](#内联函数)
     - [引用](#引用)
         - [引用vs指针](#引用vs指针)
@@ -369,16 +373,27 @@ void SayHello(string name) {
 ```
 <a id="markdown-调用方式" name="调用方式"></a>
 ### 调用方式
-* 传值调用
-该方法把参数的实际值复制给函数的形式参数。在这种情况下，修改函数内的形式参数对实际参数没有影响。
-实际传递的是值的副本。
 
-* 指针调用
-该方法把参数的地址复制给形式参数。在函数内，该地址用于访问调用中要用到的实际参数。这意味着，修改形式参数会影响实际参数。
+<a id="markdown-值传递" name="值传递"></a>
+#### 值传递
+形参是实参的拷贝，改变形参的值并不会影响外部实参的值。从被调用函数的角度来说，值传递是单向的（实参->形参），参数的值只能传入，不能传出。
 
-* 引用调用
-该方法把参数的引用复制给形式参数。在函数内，该引用用于访问调用中要用到的实际参数。这意味着，修改形式参数会影响实际参数。
+当函数内部需要修改参数，并且不希望这个改变影响调用者时，采用值传递。
 
+<a id="markdown-指针传递" name="指针传递"></a>
+#### 指针传递
+形参为指向实参地址的指针，当对形参的指向操作时，就相当于对实参本身进行的操作
+
+<a id="markdown-引用传递" name="引用传递"></a>
+#### 引用传递
+形参相当于是实参的“别名”，对形参的操作其实就是对实参的操作，在引用传递过程中，被调函数的形式参数虽然也作为局部变量在栈
+
+中开辟了内存空间，但是这时存放的是由主调函数放进来的实参变量的地址。被调函数对形参的任何操作都被处理成间接寻址，即通过
+
+栈中存放的地址访问主调函数中的实参变量。正因为如此，被调函数对形参做的任何操作都影响了主调函数中的实参变量。
+
+<a id="markdown-变量交换实例" name="变量交换实例"></a>
+#### 变量交换实例
 ```cpp
 #include "stdafx.h"
 #include <string>
@@ -386,50 +401,72 @@ void SayHello(string name) {
 using namespace std;
 
 //值传递
-void Swap(int a, int b);
-
-//指针传递
-void Swap(int* a, int* b);
-
-//引用传递
-void SwapRef(int& a, int& b);
-
-int main()
-{
-	int a = 1, b = 2;
-	Swap(a, b);
-
-	cout << "值传递，a:" << a << ",b:" << b << endl;//a:1,b:2
-
-	Swap(&a, &b);
-
-	cout << "指针传递，a:" << a << ",b:" << b << endl;//a:2,b:1
-
-	SwapRef(a, b);
-
-	cout << "引用传递，a:" << a << ",b:" << b << endl;//a:1,b:2
-
-	system("pause");
-
-	return 0;
-}
-
 void Swap(int a, int b) {
 	int temp = a;
 	a = b;
 	b = temp;
 }
 
+//指针传递，进行值的交换
 void Swap(int* a, int* b) {
 	int temp = *a;
 	*a = *b;
 	*b = temp;
 }
 
+//虽然是指针传递，但方法体内部进行的是指针本身的交换，而非指向值的交换。由此可以看出指针本身也是拷贝副本
+void SwapPt(int* a, int* b) {
+	int *temp = a;
+	temp = b;
+	b = a;
+}
+
+//引用传递
 void SwapRef(int& a, int& b) {
 	int temp = a;
 	a = b;
 	b = temp;
+}
+
+int main()
+{
+	int a,b;
+	
+	a = 1;b = 2;
+	Swap(a, b);
+	cout << "值传递，a:" << a << ",b:" << b << endl;//a:1,b:2
+
+	a = 1;b = 2;
+	Swap(&a, &b);
+	cout << "指针传递，a:" << a << ",b:" << b << endl;//a:2,b:1
+
+	a = 1;b = 2;
+	SwapRef(a, b);
+	cout << "引用传递，a:" << a << ",b:" << b << endl;//a:2,b:1
+
+	system("pause");
+
+	return 0;
+}
+```
+
+```cpp
+//指针传递，指针本身发生了拷贝
+void GetInfoAdd(int* val) {
+	cout << "&val:\t" << &val << endl;
+}
+
+//引用传递，传递的即是值本身的地址
+void GetInfoAddRef(int& ref) {
+	cout << "&ref:\t" << &ref << endl;
+}
+
+void main() {
+	int val = 16;
+
+	cout << "原地址：\t" << &val << endl;
+	GetInfoAdd(&val);
+	GetInfoAddRef(val);
 }
 ```
 
@@ -445,6 +482,7 @@ C++ 内联函数是通常与类一起使用。如果一个函数是内联的，�
 ## 引用
 引用变量是一个别名，也就是说，它是某个已存在变量的另一个名字。
 一旦把引用初始化为某个变量，就可以使用该引用名称或变量名称来指向变量。
+
 <a id="markdown-引用vs指针" name="引用vs指针"></a>
 ### 引用vs指针
 引用很容易与指针混淆，它们之间有三个主要的不同：
@@ -636,6 +674,7 @@ void main()
 {
 	Student stu1;
 	stu1.lastName = "san";
+	
 	//strcpy_s 值的拷贝，不能简单的使用=赋值
 	strcpy_s(stu1.firstName, "zhang");
 
@@ -651,3 +690,4 @@ C++中的结构体与类的区别：
 2. class继承默认是private继承，而从struct继承默认是public继承。
 
 参考引用：[C++中的结构体](http://blog.csdn.net/cainv89/article/details/48447225)
+
