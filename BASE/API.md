@@ -5,6 +5,8 @@
         - [cout](#cout)
         - [cin](#cin)
         - [getline](#getline)
+    - [iomanip](#iomanip)
+        - [setw/setfill/left/right](#setwsetfillleftright)
     - [fstream](#fstream)
         - [ofstream/ifstream](#ofstreamifstream)
 
@@ -53,6 +55,28 @@ void main() {
 	string name;
 	getline(cin, name);
 }
+```
+
+<a id="markdown-iomanip" name="iomanip"></a>
+## iomanip
+是I/O流控制头文件,就像C里面的格式化输出一样，io代表输入输出，manip是manipulator（操纵器）的缩写。
+
+<a id="markdown-setwsetfillleftright" name="setwsetfillleftright"></a>
+### setw/setfill/left/right
+setw(n)用法： 通俗地讲就是预设宽度
+1. setw后面紧跟的内容有效 
+2. setw默认右对齐，就是从右边开始填
+
+```cpp
+cout << 'A' << setfill('*') << left << setw(3) << 'B' << endl;//AB**
+cout << setfill('*') << left << setw(3) << 'A' << 'B' << endl;//A**B
+cout << 'A' << setfill('*') << right << setw(3) << 'B' << endl;//A**B
+cout << setfill('*') << right << setw(3) << 'A' << 'B' << endl;//**AB
+cout << endl;
+cout << 'A' << setfill('*') << setw(3) << 'B' << endl;//A**B
+cout << setfill('*') << setw(3) << 'A' << 'B' << endl;//**AB
+cout << 'A' << setfill('*') << setw(3) << 'B' << endl;//A**B
+cout << setfill('*') << setw(3) << 'A' << 'B' << endl;//**AB
 ```
 
 <a id="markdown-fstream" name="fstream"></a>

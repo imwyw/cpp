@@ -6,6 +6,7 @@
     * [HelloWorld](./BASE/Hello.md)
     * [基本](./BASE/Basic.md)
     * [类和对象](./BASE/ClassObject.md)
+    * [内存管理](./BASE/Mem.md)
     * [API](./BASE/API.md)
     * [FAQ](./BASE/FAQ.md)
 
