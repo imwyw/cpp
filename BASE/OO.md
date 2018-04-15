@@ -1,7 +1,7 @@
 <!-- TOC -->
 
-- [类和对象](#类和对象)
-    - [定义](#定义)
+- [面向对象](#面向对象)
+    - [类定义](#类定义)
     - [环形队列的实现](#环形队列的实现)
     - [构造函数](#构造函数)
         - [构造函数的重载](#构造函数的重载)
@@ -16,19 +16,22 @@
         - [依赖](#依赖)
         - [聚合](#聚合)
         - [继承](#继承)
-    - [NULL、0、nullptr](#null0nullptr)
+            - [继承关系](#继承关系)
+            - [实现语法](#实现语法)
+            - [继承中的访问权限](#继承中的访问权限)
+            - [继承中构造和析构](#继承中构造和析构)
 
 <!-- /TOC -->
 
-<a id="markdown-类和对象" name="类和对象"></a>
-# 类和对象
+<a id="markdown-面向对象" name="面向对象"></a>
+# 面向对象
 C++ 在 C 语言的基础上增加了面向对象编程，C++ 支持面向对象程序设计。类是 C++ 的核心特性，通常被称为用户定义的类型。
 类用于指定对象的形式，它包含了数据表示法和用于处理数据的方法。类中的数据和方法称为类的成员。函数在一个类被称为类的成员。
 
 ![](../assets/BASE/cpp_class.png)
 
-<a id="markdown-定义" name="定义"></a>
-## 定义
+<a id="markdown-类定义" name="类定义"></a>
+## 类定义
 定义一个类，本质上是定义一个数据类型的蓝图。
 这实际上并没有定义任何数据，但它定义了类的名称意味着什么，也就是说，它定义了类的对象包括了什么，以及可以在这个对象上执行哪些操作。
 类定义是以关键字 class 开头，后跟类的名称。类的主体是包含在一对花括号中。
@@ -537,52 +540,57 @@ void main() {
 <a id="markdown-继承" name="继承"></a>
 ### 继承
 
+面向对象程序设计中最重要的一个概念是继承。继承允许我们依据另一个类来定义一个类，这使得创建和维护一个应用程序变得更容易。
 
-<a id="markdown-null0nullptr" name="null0nullptr"></a>
-## NULL、0、nullptr
-```cpp
-#include "stdafx.h"
-#include <iostream>
-#include <string>
-using namespace std;
+这样做，也达到了重用代码功能和提高执行时间的效果。
 
-class Person {
-public:
-	string name;
-};
+我们以学院教学管理系统为例说明，系统中存在以下人员类型：学生、教师、行政人员等，其中学生和教师的类图如下所示：
 
-class Helper {
-public:
-	void static say(Person *per);
-	void static say(int x);
-};
+![](..\assets\BASE\继承1.jpg)
 
-void Helper::say(Person *per)
-{
-	string res = "调用say(Person *per)==========" + (nullptr == per ? "" : per->name);
-	cout << res << endl;
-}
+上图中存在很多属性方法重复，如id、name等都是共同的属性，如再增加人员类型的话也需要增加这些共同属性和方法，重复劳动。
 
-void Helper::say(int x)
-{
-	cout << "调用say(int x)============，在此不应该被调用。。。" << x << endl;
-}
+同时，如果共同方法发生变化，是否需要每个类重复的进行修改呢？
 
-int main()
-{
-	Person *zhang = new Person();
-	zhang->name = "张三";
+我们可以通过继承避免以上问题的出现，增加Person基类，对应如下：
 
-	Helper::say(zhang);
+![](..\assets\BASE\继承2.jpg)
 
-	//在项目生产环境中很可能是需要调用 say(Person *per); 这个重载方法，实际调用的是另一个重载
-	Helper::say(NULL);//等同于 Helper::say(0);
+<a id="markdown-继承关系" name="继承关系"></a>
+#### 继承关系
+- 公有继承
 
-	//所以建议使用 nullptr
-	Helper::say(nullptr);
+公有继承的特点是基类的公有成员和保护成员作为派生类的成员时，它们都保持原有的状态，而基类的私有成员仍然是私有的，不能被这个派生类的子类所访问。
 
-	return 0;
-}
-```
+- 私有继承
 
-[史上最明白的 NULL、0、nullptr 区别分析](http://www.cnblogs.com/porter/p/3611718.html)
+私有继承的特点是基类的公有成员和保护成员都作为派生类的私有成员，并且不能被这个派生类的子类所访问。
+
+- 保护继承
+
+保护继承的特点是基类的所有公有成员和保护成员都成为派生类的保护成员，并且只能被它的派生类成员函数或友元访问，基类的私有成员仍然是私有的。
+
+以下列举了不同继承方式基类和派生类特性：
+
+基类中各权限--> | public | protected | private
+---|--------|-----------|--------
+公有继承派生权限变化 |  public | protected | 不可见
+私有继承(默认)派生权限变化 | private | private | 不可见
+保护继承派生权限变化 | protected | protected | 不可见
+
+
+<a id="markdown-实现语法" name="实现语法"></a>
+#### 实现语法
+
+
+
+<a id="markdown-继承中的访问权限" name="继承中的访问权限"></a>
+#### 继承中的访问权限
+
+<a id="markdown-继承中构造和析构" name="继承中构造和析构"></a>
+#### 继承中构造和析构
+
+https://blog.csdn.net/ecitnet/article/details/2060431
+
+http://www.cnblogs.com/qlwy/archive/2011/08/25/2153584.html
+

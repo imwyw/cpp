@@ -2,11 +2,11 @@
 
 * [简介](README.md)
 
-* [基础]
+* [C++编程]
     * [HelloWorld](./BASE/Hello.md)
-    * [基本](./BASE/Basic.md)
-    * [类和对象](./BASE/ClassObject.md)
-    * [内存管理](./BASE/Mem.md)
+    * [基础](./BASE/Basic.md)
+    * [面向对象](./BASE/OO.md)
+    * [内存管理](./BASE/Memory.md)
     * [API](./BASE/API.md)
     * [FAQ](./BASE/FAQ.md)
 

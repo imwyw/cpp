@@ -13,6 +13,8 @@
         - [指向数组的指针](#指向数组的指针)
     - [指针](#指针)
         - [NULL指针和nullptr指针](#null指针和nullptr指针)
+        - [数组指针](#数组指针)
+        - [对地址的加1](#对地址的加1)
     - [函数](#函数)
         - [调用方式](#调用方式)
             - [值传递](#值传递)
@@ -271,6 +273,8 @@ double balance[10];
 p = balance;
 ```
 
+
+
 <a id="markdown-指针" name="指针"></a>
 ## 指针
 指针是一个变量，其值为另一个变量的地址，即，内存位置的直接地址。
@@ -306,7 +310,7 @@ int main()
 	cout << "&*p:" << &*p << " 等同于 p" << endl;
 	cout << "&p:" << &p << " 指针p保存在内存中的地址" << endl;
 
-	//再定义一个指针指向指针p
+	//再定义一个指针指向指针p，可以简单的看成一种的特殊类型，pp是指向 string*的指针
 	string** pp = &p;
 
 	cout << "======================指针的指针========================" << endl;
@@ -346,6 +350,66 @@ int main()
 ```
 
 nullptr是c++11中新增的特性，同样表示空指针，建议使用nullptr，因为在c++ null和0在函数重载时容易发生混淆。
+
+```cpp
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person {
+public:
+	string name;
+};
+
+class Helper {
+public:
+	void static say(Person *per);
+	void static say(int x);
+};
+
+void Helper::say(Person *per)
+{
+	string res = "调用say(Person *per)==========" + (nullptr == per ? "" : per->name);
+	cout << res << endl;
+}
+
+void Helper::say(int x)
+{
+	cout << "调用say(int x)============，在此不应该被调用。。。" << x << endl;
+}
+
+int main()
+{
+	Person *zhang = new Person();
+	zhang->name = "张三";
+
+	Helper::say(zhang);
+
+	//在项目生产环境中很可能是需要调用 say(Person *per); 这个重载方法，实际调用的是另一个重载
+	Helper::say(NULL);//等同于 Helper::say(0);
+
+	//所以建议使用 nullptr
+	Helper::say(nullptr);
+
+	return 0;
+}
+```
+
+[史上最明白的 NULL、0、nullptr 区别分析](http://www.cnblogs.com/porter/p/3611718.html)
+
+<a id="markdown-数组指针" name="数组指针"></a>
+### 数组指针
+todo 有空整理
+
+> http://www.cnblogs.com/mywebname/articles/2291540.html
+
+<a id="markdown-对地址的加1" name="对地址的加1"></a>
+### 对地址的加1
+我们经常会好奇，对地址进行加1具有什么样的意义
+
+> http://www.bkjia.com/cjjc/996658.html
+
 
 <a id="markdown-函数" name="函数"></a>
 ## 函数
@@ -547,6 +611,8 @@ template <typename T> T min(T a, T b)
 
 <a id="markdown-const" name="const"></a>
 ## const
+
+> https://blog.csdn.net/linux_ever/article/details/51344535
 
 <a id="markdown-const与基本数据类型" name="const与基本数据类型"></a>
 ### const与基本数据类型

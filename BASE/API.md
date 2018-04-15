@@ -35,6 +35,24 @@ using namespace std;
 cin >> 变量1 >> 变量2 >> …… >> 变量n;
 ```
 
+针对单个数值变量，在输入需要校验时可以如下使用：
+```cpp
+int input = 0;
+while (true) {
+	cout << "请输入参数(0-9)";
+	cin >> input;
+	if (cin.fail()) {
+		cin.clear();
+		cin.sync();
+		cin.ignore();
+		cout << "输入有误" << endl;
+	}
+	else {
+		break;
+	}
+}
+```
+
 用于输入一个数字或者是一个字符串(无特殊字符，如空格等)。当cin接收一个字符串会过滤掉不可见字符，遇“空格”、“TAB”、“回车”就结束了。
 
 <a id="markdown-getline" name="getline"></a>
