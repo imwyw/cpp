@@ -97,6 +97,12 @@ cout << 'A' << setfill('*') << setw(3) << 'B' << endl;//A**B
 cout << setfill('*') << setw(3) << 'A' << 'B' << endl;//**AB
 ```
 
+```cpp
+//使用'-'进行填充
+cout.fill('-');
+cout << setw(40) << "-" << endl;
+```
+
 <a id="markdown-fstream" name="fstream"></a>
 ## fstream
 <a id="markdown-ofstreamifstream" name="ofstreamifstream"></a>
