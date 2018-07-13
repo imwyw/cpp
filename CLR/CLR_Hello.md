@@ -1,3 +1,16 @@
+<!-- TOC -->
+
+- [CLR HelloWorld](#clr-helloworld)
+    - [项目构建](#项目构建)
+        - [新建项目](#新建项目)
+        - [stdafx.h](#stdafxh)
+        - [添加窗体](#添加窗体)
+        - [入口函数](#入口函数)
+        - [显示效果](#显示效果)
+
+<!-- /TOC -->
+
+<a id="markdown-clr-helloworld" name="clr-helloworld"></a>
 # CLR HelloWorld
 VS2010以及以前的版本，创建项目时都可以在CLR下找到“Windows窗体应用程序”的项目模板，但是VS2012以后的版本就没这么方便了。
 
@@ -5,14 +18,17 @@ VS2010以及以前的版本，创建项目时都可以在CLR下找到“Windows�
 
 可以通过打开旧版本的项目来修改，也可以像下面这样操作：
 
+<a id="markdown-项目构建" name="项目构建"></a>
 ## 项目构建
 环境：WIN10 IDE-VS2015
 
+<a id="markdown-新建项目" name="新建项目"></a>
 ### 新建项目
 选择Visual C++/CLR模板，新建一个CLR空项目
 
 ![](../assets/CLR/vs2015_clr_add.png)
 
+<a id="markdown-stdafxh" name="stdafxh"></a>
 ### stdafx.h
 添加 stdafx.h 头文件，代码如下：
 ```cpp
@@ -29,6 +45,7 @@ VS2010以及以前的版本，创建项目时都可以在CLR下找到“Windows�
 Standard Application Framework Extensions-标准应用程序框架的扩展。
 所谓头文件预编译，就是把一个工程(Project)中使用的一些MFC标准头文件(如Windows.H、Afxwin.H)预先编译，以后该工程编译时，不再编译这部分头文件，仅仅使用预编译的结果。这样可以加快编译速度，节省时间。
 
+<a id="markdown-添加窗体" name="添加窗体"></a>
 ### 添加窗体
 右键点击头文件，添加新建项，选择windows 窗体
 
@@ -42,6 +59,7 @@ Standard Application Framework Extensions-标准应用程序框架的扩展。
 
 ![](../assets/CLR/vs2015_clr_form_show.png)
 
+<a id="markdown-入口函数" name="入口函数"></a>
 ### 入口函数
 添加 HelloWorld.cpp 文件，编码实现入口函数：
 ```cpp
@@ -64,6 +82,7 @@ int main(array<System::String^>^args) {
 }
 ```
 
+<a id="markdown-显示效果" name="显示效果"></a>
 ### 显示效果
 选择 调试-开始执行(不调试) ，再显示MainForm窗体的同时，还有一个控制台窗口
 
