@@ -1,5 +1,8 @@
 // Emp_v1.cpp : 定义控制台应用程序的入口点。
 //
+/*
+v1 版本为最基本的版本，员工信息仅包含员工基本姓名，且只针对数组进行增删改查的操作
+*/
 
 #include "stdafx.h"
 int number;
@@ -93,7 +96,7 @@ void listEmp()
 		}
 		cout << (i + 1) << "\t" << employees[i] << endl;
 	}
-	cin.get();
+	PAUSE;
 }
 
 void deleteEmp()
