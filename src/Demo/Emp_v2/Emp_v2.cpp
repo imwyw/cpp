@@ -33,7 +33,7 @@ int main()
 void menu()
 {
 
-	cout << "欢迎使用xx员工管理系统 V1.0" << endl;
+	cout << "欢迎使用xx员工管理系统 V2.0" << endl;
 	cout << "---------------------------" << endl;
 	cout << "1.添加员工" << endl;
 	cout << "2.删除员工" << endl;
