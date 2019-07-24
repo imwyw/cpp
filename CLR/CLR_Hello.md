@@ -82,6 +82,11 @@ int main(array<System::String^>^args) {
 }
 ```
 
+注意，针对C++ 11版本也有 `std::array`，导致的模糊不清，这时候只要指定，为cli下即可
+```
+int main(cli::array<System::String^>^args)
+```
+
 <a id="markdown-显示效果" name="显示效果"></a>
 ### 显示效果
 选择 调试-开始执行(不调试) ，再显示MainForm窗体的同时，还有一个控制台窗口
