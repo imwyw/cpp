@@ -23,7 +23,7 @@ void EmpMenu::start()
 {
 	int number = -1;
 
-	cout << "欢迎使用xx员工管理系统 V3.0" << endl;
+	cout << "欢迎使用xx员工管理系统 V4.0" << endl;
 	cout << "---------------------------" << endl;
 	cout << "1.添加员工" << endl;
 	cout << "2.删除员工" << endl;
