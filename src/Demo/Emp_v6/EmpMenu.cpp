@@ -25,7 +25,8 @@ void EmpMenu::start()
 	cout << "5.员工列表" << endl;
 	cout << "6.保存员工" << endl;
 	cout << "7.读取员工列表" << endl;
-	cout << "8.退出" << endl;
+	cout << "8.排序" << endl;
+	cout << "0.退出" << endl;
 	cout << "---------------------------" << endl;
 	cout << "请选择：" << endl;
 	cin >> number;
@@ -103,6 +104,12 @@ void EmpMenu::start()
 		loadData();
 		break;
 	case 8:
+		cout << "按编号进行升序" << endl;
+		empList.sort();
+		cout << "排序完成" << endl;
+		PAUSE;
+		break;
+	case 0:
 		isExist = true;
 		break;
 	default:

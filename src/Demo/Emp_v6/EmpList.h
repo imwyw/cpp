@@ -16,5 +16,6 @@ public:
 	int findEmp(string name);
 	void showList();
 	int getSize();
+	void sort();//¶Ô±àºÅ½øÐÐÅÅÐò
 };
 

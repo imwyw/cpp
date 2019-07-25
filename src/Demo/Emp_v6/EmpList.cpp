@@ -124,3 +124,20 @@ int EmpList::getSize()
 {
 	return size;
 }
+
+void EmpList::sort()
+{
+	for (int i = 0; i < size - 1; i++)
+	{
+		for (int j = 0; j < size - i - 1; j++)
+		{
+			// 如果前面比后面大，则交换，即升序排序
+			if (employeeList[j]->id > employeeList[j + 1]->id)
+			{
+				Employee* temp = employeeList[j];
+				employeeList[j] = employeeList[j + 1];
+				employeeList[j + 1] = temp;
+			}
+		}
+	}
+}
