@@ -1,6 +1,7 @@
 #pragma once
 #include "CommonHelper.h"
 #include "Employee.h"
+#include "EmployeeContainer.h"
 
 namespace Emp_Form {
 
@@ -57,6 +58,7 @@ namespace Emp_Form {
 	private: System::Windows::Forms::PictureBox^  pbHead;
 	private: System::Windows::Forms::Button^  btnOK;
 	private: System::Windows::Forms::Button^  btnBack;
+	private: System::Windows::Forms::Button^  button1;
 
 
 
@@ -87,6 +89,7 @@ namespace Emp_Form {
 			this->pbHead = (gcnew System::Windows::Forms::PictureBox());
 			this->btnOK = (gcnew System::Windows::Forms::Button());
 			this->btnBack = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbHead))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -181,28 +184,39 @@ namespace Emp_Form {
 			// 
 			// btnOK
 			// 
-			this->btnOK->Location = System::Drawing::Point(139, 230);
+			this->btnOK->Location = System::Drawing::Point(128, 230);
 			this->btnOK->Name = L"btnOK";
-			this->btnOK->Size = System::Drawing::Size(75, 23);
-			this->btnOK->TabIndex = 11;
-			this->btnOK->Text = L"确定";
+			this->btnOK->Size = System::Drawing::Size(114, 40);
+			this->btnOK->TabIndex = 4;
+			this->btnOK->Text = L"确定并退出";
 			this->btnOK->UseVisualStyleBackColor = true;
 			this->btnOK->Click += gcnew System::EventHandler(this, &FrmAddEmp::btnOK_Click);
 			// 
 			// btnBack
 			// 
-			this->btnBack->Location = System::Drawing::Point(379, 230);
+			this->btnBack->Location = System::Drawing::Point(460, 230);
 			this->btnBack->Name = L"btnBack";
-			this->btnBack->Size = System::Drawing::Size(75, 23);
-			this->btnBack->TabIndex = 12;
+			this->btnBack->Size = System::Drawing::Size(114, 40);
+			this->btnBack->TabIndex = 5;
 			this->btnBack->Text = L"返回";
 			this->btnBack->UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(294, 230);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(114, 40);
+			this->button1->TabIndex = 11;
+			this->button1->Text = L"确定并继续";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &FrmAddEmp::btnOK_Click);
 			// 
 			// FrmAddEmp
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(690, 350);
+			this->ClientSize = System::Drawing::Size(690, 282);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->btnBack);
 			this->Controls->Add(this->btnOK);
 			this->Controls->Add(this->pbHead);
@@ -217,7 +231,9 @@ namespace Emp_Form {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Name = L"FrmAddEmp";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"FrmAddEmp";
+			this->Load += gcnew System::EventHandler(this, &FrmAddEmp::FrmAddEmp_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbHead))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -226,10 +242,29 @@ namespace Emp_Form {
 #pragma endregion
 	private: System::Void btnOK_Click(System::Object^  sender, System::EventArgs^  e) {
 		Employee *emp = new Employee();
+		// 将CLR类型与C++中类型进行转换
 		emp->id = Int32::Parse(txtId->Text);
 		emp->name = CommonHelper::ConvertToString(txtName->Text);
 		emp->phone = CommonHelper::ConvertToString(txtPhone->Text);
 		emp->depart = CommonHelper::ConvertToString(txtDepart->Text);
+
+		EmployeeContainer::empVector->push_back(emp);
+		MessageBox::Show("添加成功-" + EmployeeContainer::empVector->size());
+
+		// 判断是哪个按钮的点击
+		if (((Button^)sender)->Text == "确定并退出")
+		{
+			this->Close();
+		}
+		else
+		{
+			txtId->Clear();
+			txtName->Clear();
+			txtPhone->Clear();
+			txtDepart->Clear();
+		}
+	}
+	private: System::Void FrmAddEmp_Load(System::Object^  sender, System::EventArgs^  e) {
 
 	}
 	};

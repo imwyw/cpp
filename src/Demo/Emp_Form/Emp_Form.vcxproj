@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClInclude Include="CommonHelper.h" />
     <ClInclude Include="Employee.h" />
+    <ClInclude Include="EmployeeContainer.h" />
     <ClInclude Include="FrmAddEmp.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -149,9 +150,10 @@
   <ItemGroup>
     <ClCompile Include="CommonHelper.cpp" />
     <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="EmployeeContainer.cpp" />
     <ClCompile Include="FrmAddEmp.cpp" />
     <ClCompile Include="MainForm.cpp" />
-    <ClCompile Include="program.cpp" />
+    <ClCompile Include="Emp_Form.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FrmAddEmp.resx">
