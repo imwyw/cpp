@@ -1,0 +1,258 @@
+#include "stdafx.h"
+#include "EmpMenu.h"
+
+
+
+EmpMenu::EmpMenu()
+{
+	for (int i = 0; i < size(employeeArray); i++)
+	{
+		employeeArray[i] = nullptr;
+	}
+	isExist = false;
+}
+
+
+EmpMenu::~EmpMenu()
+{
+}
+
+void EmpMenu::start()
+{
+	int number = -1;
+
+	cout << "欢迎使用xx员工管理系统 V3.0" << endl;
+	cout << "---------------------------" << endl;
+	cout << "1.添加员工" << endl;
+	cout << "2.删除员工" << endl;
+	cout << "3.修改员工" << endl;
+	cout << "4.查找员工" << endl;
+	cout << "5.员工列表" << endl;
+	cout << "6.保存员工" << endl;
+	cout << "7.读取员工列表" << endl;
+	cout << "8.退出" << endl;
+	cout << "---------------------------" << endl;
+	cout << "请选择：" << endl;
+	cin >> number;
+
+	Employee *emp;
+	string name;
+	int index = -1;
+
+	switch (number)
+	{
+	case 1:
+		cout << "添加员工" << endl;
+		emp = new Employee();
+		cout << "请输入员工编号" << endl;
+		cin >> emp->id;
+		cout << "请输入员工姓名" << endl;
+		cin >> emp->name;
+		cout << "请输入员工手机" << endl;
+		cin >> emp->phone;
+		cout << "请输入员工部门" << endl;
+		cin >> emp->depart;
+		if (addEmp(emp))
+		{
+			cout << "添加成功！" << endl;
+		}
+		else
+		{
+			cout << "添加失败" << endl;
+		}
+		PAUSE;
+		break;
+	case 2:
+		cout << "删除员工" << endl;
+		cout << "请输入要删除员工的姓名：" << endl;
+		cin >> name;
+		if (deleteEmp(name))
+		{
+			cout << "已删除" << endl;
+		}
+		else
+		{
+			cout << "删除失败！" << endl;
+		}
+		PAUSE;
+		break;
+	case 3:
+		cout << "修改员工" << endl;
+		cout << "请输入要修改员工的姓名：";
+		cin >> name;
+		emp = new Employee();
+		cout << "请输入员工新编号：" << endl;
+		cin >> emp->id;
+		cout << "请输入员工新姓名：" << endl;
+		cin >> emp->name;
+		cout << "请输入员工新手机：" << endl;
+		cin >> emp->phone;
+		cout << "请输入员工新部门：" << endl;
+		cin >> emp->depart;
+		if (updateEmp(name, emp))
+		{
+			cout << "更新成功！" << endl;
+		}
+		else
+		{
+			cout << "更新失败！" << endl;
+		}
+		PAUSE;
+		break;
+	case 4:
+		cout << "查找员工" << endl;
+		cout << "请输入要查询员工的姓名：" << endl;
+		cin >> name;
+		index = findEmp(name);
+		if (index > -1)
+		{
+			cout << "该员工编号为" << (index + 1) << endl;
+		}
+		else
+		{
+			cout << "未找到该员工！" << endl;
+		}
+		PAUSE;
+		break;
+	case 5:
+		cout << "员工列表" << endl;
+		list();
+		PAUSE;
+		break;
+	case 6:
+		cout << "保存员工" << endl;
+		saveData();
+
+		break;
+	case 7:
+		cout << "读取员工列表" << endl;
+		loadData();
+		break;
+	case 8:
+		isExist = true;
+		break;
+	default:
+		cout << "请输入正确的选项" << endl;
+		break;
+	}
+}
+
+bool EmpMenu::addEmp(Employee * emp)
+{
+	employeesVector.push_back(emp);
+	return true;
+}
+
+bool EmpMenu::deleteEmp(string name)
+{
+	int index = -1;
+	// 找到指定员工的索引位置
+	for (int i = 0; i < employeesVector.size(); i++)
+	{
+		if (employeesVector[i]->name == name)
+		{
+			index = i;
+			break;
+		}
+	}
+
+	if (index == -1)
+	{
+		cout << "未找到该员工" << endl;
+		return false;
+	}
+
+	employeesVector.erase(employeesVector.begin() + index);
+	return true;
+}
+
+bool EmpMenu::updateEmp(string name, Employee * emp)
+{
+	for (int i = 0; i < employeesVector.size(); i++)
+	{
+		if (employeesVector[i]->name == name)
+		{
+			employeesVector[i] = emp;
+			return true;
+		}
+	}
+	return false;
+}
+
+int EmpMenu::findEmp(string name)
+{
+	cout << "请输入员工姓名：" << endl;
+	cin >> name;
+	int index = -1;
+	for (int i = 0; i < employeesVector.size(); i++)
+	{
+		if (employeesVector[i]->name == name)
+		{
+			index = i;
+			break;
+		}
+	}
+	return index;
+}
+
+void EmpMenu::list()
+{
+	cout << "编号\t姓名\t电话\t部门" << endl;
+	for (int i = 0; i < employeesVector.size(); i++)
+	{
+		cout << employeesVector[i]->id << "\t" << employeesVector[i]->name << "\t"
+			<< employeesVector[i]->phone << "\t" << employeesVector[i]->depart << endl;
+	}
+
+	cout << "使用迭代器进行遍历" << endl;
+	Employee* emp;
+	// 声明一个迭代器
+	vector<Employee*>::iterator it;
+	for (it = employeesVector.begin(); it != employeesVector.end(); it++)
+	{
+		emp = *it;
+		cout << emp->id << "\t" << emp->name << "\t" << emp->phone << "\t" << emp->depart << endl;
+	}
+
+}
+
+void EmpMenu::saveData()
+{
+	ofstream ofs;
+	ofs.open("data.bin", ios::binary);
+	if (ofs)
+	{
+		for (int i = 0; i < employeesVector.size(); i++)
+		{
+			ofs.write((char*)employeesVector[i], sizeof(Employee));
+		}
+		ofs.close();
+		cout << "保存成功！" << endl;
+	}
+	else
+	{
+		cout << "保存失败!!!" << endl;
+	}
+}
+
+void EmpMenu::loadData()
+{
+	ifstream ifs;
+	ifs.open("data.bin", ios::binary);
+	if (ifs)
+	{
+		Employee *temp = new Employee();
+		int index = 0;
+		while (ifs.read((char*)temp, sizeof(Employee)))
+		{
+			employeesVector.push_back(temp);
+		}
+		ifs.close();
+		cout << "读取完成" << endl;
+	}
+	else
+	{
+		cout << "读取失败" << endl;
+	}
+}
+
