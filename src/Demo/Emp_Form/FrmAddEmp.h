@@ -197,7 +197,7 @@ namespace Emp_Form {
 			this->btnBack->Location = System::Drawing::Point(460, 230);
 			this->btnBack->Name = L"btnBack";
 			this->btnBack->Size = System::Drawing::Size(114, 40);
-			this->btnBack->TabIndex = 5;
+			this->btnBack->TabIndex = 6;
 			this->btnBack->Text = L"返回";
 			this->btnBack->UseVisualStyleBackColor = true;
 			// 
@@ -206,7 +206,7 @@ namespace Emp_Form {
 			this->button1->Location = System::Drawing::Point(294, 230);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(114, 40);
-			this->button1->TabIndex = 11;
+			this->button1->TabIndex = 5;
 			this->button1->Text = L"确定并继续";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &FrmAddEmp::btnOK_Click);
@@ -233,7 +233,6 @@ namespace Emp_Form {
 			this->Name = L"FrmAddEmp";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"FrmAddEmp";
-			this->Load += gcnew System::EventHandler(this, &FrmAddEmp::FrmAddEmp_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbHead))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -264,8 +263,6 @@ namespace Emp_Form {
 			txtDepart->Clear();
 		}
 	}
-	private: System::Void FrmAddEmp_Load(System::Object^  sender, System::EventArgs^  e) {
 
-	}
 	};
 }

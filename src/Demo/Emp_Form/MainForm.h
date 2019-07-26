@@ -1,5 +1,6 @@
 #pragma once
 #include "FrmAddEmp.h"
+#include "FrmEmpList.h"
 
 namespace Emp_Form {
 
@@ -110,6 +111,7 @@ namespace Emp_Form {
 			this->tsmiEmpList->Name = L"tsmiEmpList";
 			this->tsmiEmpList->Size = System::Drawing::Size(181, 26);
 			this->tsmiEmpList->Text = L"员工列表";
+			this->tsmiEmpList->Click += gcnew System::EventHandler(this, &MainForm::tsmiEmpList_Click);
 			// 
 			// toolStripMenuItem1
 			// 
@@ -168,6 +170,13 @@ namespace Emp_Form {
 		frm->MdiParent = this;
 		frm->Show();
 	}
+
+	private: System::Void tsmiEmpList_Click(System::Object^  sender, System::EventArgs^  e) {
+		FrmEmpList^ frm = gcnew FrmEmpList();
+		frm->MdiParent = this;
+		frm->Show();
+	}
+
 
 	};
 }

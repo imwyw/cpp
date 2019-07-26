@@ -135,6 +135,9 @@
     <ClInclude Include="FrmAddEmp.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="FrmEmpList.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -152,12 +155,16 @@
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="EmployeeContainer.cpp" />
     <ClCompile Include="FrmAddEmp.cpp" />
+    <ClCompile Include="FrmEmpList.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="Emp_Form.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FrmAddEmp.resx">
       <DependentUpon>FrmAddEmp.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEmpList.resx">
+      <DependentUpon>FrmEmpList.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
