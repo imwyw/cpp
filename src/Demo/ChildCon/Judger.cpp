@@ -35,7 +35,9 @@ void Judger::AnalysisTask(Task task, Ball balls[], int length)
 	}
 
 	//ÅĞ¶ÏÓëÈÎÎñÊÇ·ñÆ¥Åä
-	if (task.redNumber == redCount&&task.blackNumber == blackCount&&task.greenNumber == greenCount)
+	if (task.redNumber == redCount
+		&&task.blackNumber == blackCount
+		&&task.greenNumber == greenCount)
 	{
 		cout << "¹§Ï²Äã£¬Ğ¡ÅóÓÑ" << endl;
 	}
