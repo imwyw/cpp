@@ -49,6 +49,9 @@ namespace Emp_Form {
 	private: System::Windows::Forms::ToolStripMenuItem^  帮助ToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  查看帮助ToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  关于我们ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  tsmiSaveData;
+	private: System::Windows::Forms::ToolStripMenuItem^  tsmiLoadData;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem2;
 
 
 	private:
@@ -69,6 +72,9 @@ namespace Emp_Form {
 			this->tsmiAddEmp = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiEmpList = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->tsmiSaveData = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiLoadData = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem2 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->tsmiExit = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->帮助ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->查看帮助ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -91,9 +97,9 @@ namespace Emp_Form {
 			// 
 			// 员工管理ToolStripMenuItem
 			// 
-			this->员工管理ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+			this->员工管理ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(7) {
 				this->tsmiAddEmp,
-					this->tsmiEmpList, this->toolStripMenuItem1, this->tsmiExit
+					this->tsmiEmpList, this->toolStripMenuItem1, this->tsmiSaveData, this->tsmiLoadData, this->toolStripMenuItem2, this->tsmiExit
 			});
 			this->员工管理ToolStripMenuItem->Name = L"员工管理ToolStripMenuItem";
 			this->员工管理ToolStripMenuItem->Size = System::Drawing::Size(81, 24);
@@ -117,6 +123,25 @@ namespace Emp_Form {
 			// 
 			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
 			this->toolStripMenuItem1->Size = System::Drawing::Size(178, 6);
+			// 
+			// tsmiSaveData
+			// 
+			this->tsmiSaveData->Name = L"tsmiSaveData";
+			this->tsmiSaveData->Size = System::Drawing::Size(181, 26);
+			this->tsmiSaveData->Text = L"保存数据";
+			this->tsmiSaveData->Click += gcnew System::EventHandler(this, &MainForm::tsmiSaveData_Click);
+			// 
+			// tsmiLoadData
+			// 
+			this->tsmiLoadData->Name = L"tsmiLoadData";
+			this->tsmiLoadData->Size = System::Drawing::Size(181, 26);
+			this->tsmiLoadData->Text = L"加载数据";
+			this->tsmiLoadData->Click += gcnew System::EventHandler(this, &MainForm::tsmiLoadData_Click);
+			// 
+			// toolStripMenuItem2
+			// 
+			this->toolStripMenuItem2->Name = L"toolStripMenuItem2";
+			this->toolStripMenuItem2->Size = System::Drawing::Size(178, 6);
 			// 
 			// tsmiExit
 			// 
@@ -178,5 +203,41 @@ namespace Emp_Form {
 	}
 
 
+	private: System::Void tsmiSaveData_Click(System::Object^  sender, System::EventArgs^  e) {
+		ofstream ofs("data.bin", ios::binary);
+		if (ofs)
+		{
+			for (int i = 0; i < EmployeeContainer::empVector->size(); i++)
+			{
+				ofs.write((char*)EmployeeContainer::empVector->at(i), sizeof(Employee));
+			}
+			ofs.close();
+			MessageBox::Show("保存成功！", "提示");
+		}
+		else
+		{
+			MessageBox::Show("无法保存！", "警告");
+		}
+	}
+
+	private: System::Void tsmiLoadData_Click(System::Object^  sender, System::EventArgs^  e) {
+		ifstream ifs;
+		ifs.open("data.bin", ios::binary);
+		if (ifs)
+		{
+			Employee* emp = new Employee();
+			while (ifs.read((char*)emp, sizeof(Employee)))
+			{
+				EmployeeContainer::empVector->push_back(emp);
+				emp = new Employee();
+			}
+			ifs.close();
+			MessageBox::Show("加载数据完成！", "提示");
+		}
+		else
+		{
+			MessageBox::Show("读取数据发生异常！", "警告");
+		}
+	}
 	};
 }
