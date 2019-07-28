@@ -17,6 +17,9 @@ namespace Emp_Form {
 	/// </summary>
 	public ref class FrmAddEmp : public System::Windows::Forms::Form
 	{
+	private:
+		// 修改员工时，记录员工索引，加载窗体时需要进行判断
+		int empIndex = -1;
 	public:
 		FrmAddEmp(void)
 		{
@@ -24,6 +27,10 @@ namespace Emp_Form {
 			//
 			//TODO:  在此处添加构造函数代码
 			//
+		}
+		FrmAddEmp(int index) {
+			InitializeComponent();
+			empIndex = index;
 		}
 
 	protected:
@@ -58,7 +65,9 @@ namespace Emp_Form {
 	private: System::Windows::Forms::PictureBox^  pbHead;
 	private: System::Windows::Forms::Button^  btnOK;
 	private: System::Windows::Forms::Button^  btnBack;
-	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  btnContinue;
+
+
 
 
 
@@ -89,7 +98,7 @@ namespace Emp_Form {
 			this->pbHead = (gcnew System::Windows::Forms::PictureBox());
 			this->btnOK = (gcnew System::Windows::Forms::Button());
 			this->btnBack = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btnContinue = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbHead))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -200,23 +209,24 @@ namespace Emp_Form {
 			this->btnBack->TabIndex = 6;
 			this->btnBack->Text = L"返回";
 			this->btnBack->UseVisualStyleBackColor = true;
+			this->btnBack->Click += gcnew System::EventHandler(this, &FrmAddEmp::btnBack_Click);
 			// 
-			// button1
+			// btnContinue
 			// 
-			this->button1->Location = System::Drawing::Point(294, 230);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(114, 40);
-			this->button1->TabIndex = 5;
-			this->button1->Text = L"确定并继续";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &FrmAddEmp::btnOK_Click);
+			this->btnContinue->Location = System::Drawing::Point(294, 230);
+			this->btnContinue->Name = L"btnContinue";
+			this->btnContinue->Size = System::Drawing::Size(114, 40);
+			this->btnContinue->TabIndex = 5;
+			this->btnContinue->Text = L"确定并继续";
+			this->btnContinue->UseVisualStyleBackColor = true;
+			this->btnContinue->Click += gcnew System::EventHandler(this, &FrmAddEmp::btnOK_Click);
 			// 
 			// FrmAddEmp
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(690, 282);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->btnContinue);
 			this->Controls->Add(this->btnBack);
 			this->Controls->Add(this->btnOK);
 			this->Controls->Add(this->pbHead);
@@ -232,7 +242,8 @@ namespace Emp_Form {
 			this->Controls->Add(this->label1);
 			this->Name = L"FrmAddEmp";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"FrmAddEmp";
+			this->Text = L"添加员工";
+			this->Load += gcnew System::EventHandler(this, &FrmAddEmp::FrmAddEmp_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbHead))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -247,21 +258,52 @@ namespace Emp_Form {
 		emp->phone = CommonHelper::ConvertToString(txtPhone->Text);
 		emp->depart = CommonHelper::ConvertToString(txtDepart->Text);
 
-		EmployeeContainer::empVector->push_back(emp);
-		MessageBox::Show("添加成功-" + EmployeeContainer::empVector->size());
-
-		// 判断是哪个按钮的点击
-		if (((Button^)sender)->Text == "确定并退出")
+		// 默认为新增
+		if (empIndex == -1)
 		{
-			this->Close();
+			EmployeeContainer::empVector->push_back(emp);
+			MessageBox::Show("添加成功-" + EmployeeContainer::empVector->size());
+			// 判断是哪个按钮的点击
+			if (((Button^)sender)->Text == "确定并退出")
+			{
+				this->Close();
+			}
+			else
+			{
+				txtId->Clear();
+				txtName->Clear();
+				txtPhone->Clear();
+				txtDepart->Clear();
+			}
 		}
 		else
 		{
-			txtId->Clear();
-			txtName->Clear();
-			txtPhone->Clear();
-			txtDepart->Clear();
+			// 如有index值，则为编辑状态
+			EmployeeContainer::empVector->at(empIndex) = emp;
+			MessageBox::Show("更新成功-" + CommonHelper::ConvertToCLRString(emp->name));
+			this->Close();
 		}
+
+	}
+			 // 窗体加载事件，加载编辑员工的信息
+	private: System::Void FrmAddEmp_Load(System::Object^  sender, System::EventArgs^  e) {
+		// empid不是-1，即编辑状态，需要加载员工信息
+		if (empIndex != -1)
+		{
+			this->Text = "更新员工信息";
+			this->btnContinue->Hide();// 隐藏其中一个按钮
+			this->btnOK->Text = "保存";
+			Employee* emp = EmployeeContainer::empVector->at(empIndex);
+			this->txtId->Text = emp->id + "";
+			this->txtName->Text = CommonHelper::ConvertToCLRString(emp->name);
+			this->txtPhone->Text = CommonHelper::ConvertToCLRString(emp->phone);
+			this->txtDepart->Text = CommonHelper::ConvertToCLRString(emp->depart);
+		}
+
+	}
+
+	private: System::Void btnBack_Click(System::Object^  sender, System::EventArgs^  e) {
+		this->Close();
 	}
 
 	};

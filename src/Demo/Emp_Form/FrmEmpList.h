@@ -2,6 +2,7 @@
 #include "Employee.h"
 #include "EmployeeContainer.h"
 #include "CommonHelper.h"
+#include "FrmAddEmp.h"
 
 namespace Emp_Form {
 
@@ -245,6 +246,11 @@ namespace Emp_Form {
 
 
 	private: System::Void tsmiDelete_Click(System::Object^  sender, System::EventArgs^  e) {
+		// 未选择任何项，则返回
+		if (lvEmp->SelectedIndices->Count == 0)
+		{
+			return;
+		}
 		// 获取选中项的索引
 		int index = lvEmp->SelectedIndices[0];
 		Employee* emp = EmployeeContainer::empVector->at(index);
@@ -263,11 +269,18 @@ namespace Emp_Form {
 			LoadEmpData(EmployeeContainer::empVector);
 			MessageBox::Show("删除成功！");
 		}
-
 	}
 
 	private: System::Void tsmiModify_Click(System::Object^  sender, System::EventArgs^  e) {
-
+		// 未选择任何项，则返回
+		if (lvEmp->SelectedIndices->Count == 0)
+		{
+			return;
+		}
+		int index = lvEmp->SelectedIndices[0];
+		FrmAddEmp^ frm = gcnew FrmAddEmp(index);
+		frm->ShowDialog();// 使用模态窗口
+		LoadEmpData(EmployeeContainer::empVector);
 	}
 
 	};
