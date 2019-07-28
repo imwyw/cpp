@@ -18,5 +18,6 @@ int main(cli::array<System::String^>^ args) {
 
 	//创建主窗口并运行它
 	Application::Run(gcnew MainForm());
+	Application::Exit();
 	return 0;
 }
