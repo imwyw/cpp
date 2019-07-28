@@ -5,12 +5,13 @@ Employee::Employee() {}
 
 Employee::~Employee() {}
 
-Employee::Employee(int id, string name, string phone, string depart)
+Employee::Employee(int id, string name, string phone, string depart, int headerIndex)
 {
 	this->id = id;
 	this->name = name;
 	this->phone = phone;
 	this->depart = depart;
+	this->headerIndex = headerIndex;
 }
 
 void Employee::toString()

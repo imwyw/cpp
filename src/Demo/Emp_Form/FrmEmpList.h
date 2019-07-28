@@ -51,6 +51,7 @@ namespace Emp_Form {
 	private: System::Windows::Forms::ContextMenuStrip^  contextMenuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^  tsmiModify;
 	private: System::Windows::Forms::ToolStripMenuItem^  tsmiDelete;
+	private: System::Windows::Forms::ImageList^  imageList1;
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -69,6 +70,7 @@ namespace Emp_Form {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(FrmEmpList::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->txtName = (gcnew System::Windows::Forms::TextBox());
 			this->btnQuery = (gcnew System::Windows::Forms::Button());
@@ -80,6 +82,7 @@ namespace Emp_Form {
 			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->tsmiModify = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiDelete = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->imageList1 = (gcnew System::Windows::Forms::ImageList(this->components));
 			this->contextMenuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -122,6 +125,7 @@ namespace Emp_Form {
 			this->lvEmp->MultiSelect = false;
 			this->lvEmp->Name = L"lvEmp";
 			this->lvEmp->Size = System::Drawing::Size(495, 327);
+			this->lvEmp->SmallImageList = this->imageList1;
 			this->lvEmp->TabIndex = 3;
 			this->lvEmp->UseCompatibleStateImageBehavior = false;
 			this->lvEmp->View = System::Windows::Forms::View::Details;
@@ -154,21 +158,34 @@ namespace Emp_Form {
 					this->tsmiDelete
 			});
 			this->contextMenuStrip1->Name = L"contextMenuStrip1";
-			this->contextMenuStrip1->Size = System::Drawing::Size(176, 80);
+			this->contextMenuStrip1->Size = System::Drawing::Size(109, 52);
 			// 
 			// tsmiModify
 			// 
 			this->tsmiModify->Name = L"tsmiModify";
-			this->tsmiModify->Size = System::Drawing::Size(175, 24);
+			this->tsmiModify->Size = System::Drawing::Size(108, 24);
 			this->tsmiModify->Text = L"修改";
 			this->tsmiModify->Click += gcnew System::EventHandler(this, &FrmEmpList::tsmiModify_Click);
 			// 
 			// tsmiDelete
 			// 
 			this->tsmiDelete->Name = L"tsmiDelete";
-			this->tsmiDelete->Size = System::Drawing::Size(175, 24);
+			this->tsmiDelete->Size = System::Drawing::Size(108, 24);
 			this->tsmiDelete->Text = L"删除";
 			this->tsmiDelete->Click += gcnew System::EventHandler(this, &FrmEmpList::tsmiDelete_Click);
+			// 
+			// imageList1
+			// 
+			this->imageList1->ImageStream = (cli::safe_cast<System::Windows::Forms::ImageListStreamer^>(resources->GetObject(L"imageList1.ImageStream")));
+			this->imageList1->TransparentColor = System::Drawing::Color::Transparent;
+			this->imageList1->Images->SetKeyName(0, L"1.jpg");
+			this->imageList1->Images->SetKeyName(1, L"2.jpg");
+			this->imageList1->Images->SetKeyName(2, L"3.jpg");
+			this->imageList1->Images->SetKeyName(3, L"4.jpg");
+			this->imageList1->Images->SetKeyName(4, L"5.jpg");
+			this->imageList1->Images->SetKeyName(5, L"6.jpg");
+			this->imageList1->Images->SetKeyName(6, L"7.jpg");
+			this->imageList1->Images->SetKeyName(7, L"8.jpg");
 			// 
 			// FrmEmpList
 			// 
@@ -232,6 +249,9 @@ namespace Emp_Form {
 			// 构造 ListViewItem，用于显示数据
 			ListViewItem^ item = gcnew ListViewItem(emp->id + "");
 			lvEmp->Items->Add(item);
+
+			// 设置头像
+			item->ImageIndex = emp->headerIndex;
 
 			// 添加每项详细信息
 			String^ name = CommonHelper::ConvertToCLRString(emp->name);

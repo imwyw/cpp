@@ -36,6 +36,9 @@
     <ClInclude Include="FrmEmpList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="FrmChooseImage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp">
@@ -59,12 +62,18 @@
     <ClCompile Include="FrmEmpList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="FrmChooseImage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FrmAddEmp.resx">
       <Filter>资源文件</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
+      <Filter>资源文件</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEmpList.resx">
       <Filter>资源文件</Filter>
     </EmbeddedResource>
   </ItemGroup>

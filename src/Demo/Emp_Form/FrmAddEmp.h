@@ -2,6 +2,7 @@
 #include "CommonHelper.h"
 #include "Employee.h"
 #include "EmployeeContainer.h"
+#include "FrmChooseImage.h"
 
 namespace Emp_Form {
 
@@ -66,6 +67,8 @@ namespace Emp_Form {
 	private: System::Windows::Forms::Button^  btnOK;
 	private: System::Windows::Forms::Button^  btnBack;
 	private: System::Windows::Forms::Button^  btnContinue;
+	private: System::Windows::Forms::ImageList^  ilPhotos;
+	private: System::ComponentModel::IContainer^  components;
 
 
 
@@ -76,7 +79,7 @@ namespace Emp_Form {
 		/// <summary>
 		/// 必需的设计器变量。
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -85,6 +88,8 @@ namespace Emp_Form {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(FrmAddEmp::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -99,6 +104,7 @@ namespace Emp_Form {
 			this->btnOK = (gcnew System::Windows::Forms::Button());
 			this->btnBack = (gcnew System::Windows::Forms::Button());
 			this->btnContinue = (gcnew System::Windows::Forms::Button());
+			this->ilPhotos = (gcnew System::Windows::Forms::ImageList(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbHead))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -185,11 +191,15 @@ namespace Emp_Form {
 			// 
 			// pbHead
 			// 
-			this->pbHead->Location = System::Drawing::Point(470, 32);
+			this->pbHead->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbHead.Image")));
+			this->pbHead->Location = System::Drawing::Point(475, 32);
 			this->pbHead->Name = L"pbHead";
-			this->pbHead->Size = System::Drawing::Size(146, 148);
+			this->pbHead->Size = System::Drawing::Size(168, 165);
+			this->pbHead->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pbHead->TabIndex = 10;
 			this->pbHead->TabStop = false;
+			this->pbHead->Tag = L"0";
+			this->pbHead->Click += gcnew System::EventHandler(this, &FrmAddEmp::pbHead_Click);
 			// 
 			// btnOK
 			// 
@@ -220,6 +230,19 @@ namespace Emp_Form {
 			this->btnContinue->Text = L"确定并继续";
 			this->btnContinue->UseVisualStyleBackColor = true;
 			this->btnContinue->Click += gcnew System::EventHandler(this, &FrmAddEmp::btnOK_Click);
+			// 
+			// ilPhotos
+			// 
+			this->ilPhotos->ImageStream = (cli::safe_cast<System::Windows::Forms::ImageListStreamer^>(resources->GetObject(L"ilPhotos.ImageStream")));
+			this->ilPhotos->TransparentColor = System::Drawing::Color::Transparent;
+			this->ilPhotos->Images->SetKeyName(0, L"1.jpg");
+			this->ilPhotos->Images->SetKeyName(1, L"2.jpg");
+			this->ilPhotos->Images->SetKeyName(2, L"3.jpg");
+			this->ilPhotos->Images->SetKeyName(3, L"4.jpg");
+			this->ilPhotos->Images->SetKeyName(4, L"5.jpg");
+			this->ilPhotos->Images->SetKeyName(5, L"6.jpg");
+			this->ilPhotos->Images->SetKeyName(6, L"7.jpg");
+			this->ilPhotos->Images->SetKeyName(7, L"8.jpg");
 			// 
 			// FrmAddEmp
 			// 
@@ -257,6 +280,7 @@ namespace Emp_Form {
 		emp->name = CommonHelper::ConvertToString(txtName->Text);
 		emp->phone = CommonHelper::ConvertToString(txtPhone->Text);
 		emp->depart = CommonHelper::ConvertToString(txtDepart->Text);
+		emp->headerIndex = Int32::Parse(pbHead->Tag->ToString());
 
 		// 默认为新增
 		if (empIndex == -1)
@@ -306,5 +330,16 @@ namespace Emp_Form {
 		this->Close();
 	}
 
+	private: System::Void pbHead_Click(System::Object^  sender, System::EventArgs^  e) {
+		// 实例化委托对象，委托方法为 ChangeHead
+		Action<int>^ changeAction = gcnew Action<int>(this, &FrmAddEmp::ChangeHead);
+		FrmChooseImage^ frm = gcnew FrmChooseImage(changeAction);
+		frm->Show();
+	}
+
+	private:System::Void ChangeHead(int index) {
+		this->pbHead->Tag = index;
+		pbHead->Image = ilPhotos->Images[index];
+	}
 	};
 }
