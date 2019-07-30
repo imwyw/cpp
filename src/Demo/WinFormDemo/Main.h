@@ -34,6 +34,11 @@ namespace WinFormDemo {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Button^  btnOK;
+	private: System::Windows::Forms::CheckBox^  chkRemember;
+	private: System::Windows::Forms::TextBox^  txtConsole;
+
+	protected:
 
 	private:
 		/// <summary>
@@ -48,12 +53,69 @@ namespace WinFormDemo {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"Main";
-			this->Padding = System::Windows::Forms::Padding(0);
+			this->btnOK = (gcnew System::Windows::Forms::Button());
+			this->chkRemember = (gcnew System::Windows::Forms::CheckBox());
+			this->txtConsole = (gcnew System::Windows::Forms::TextBox());
+			this->SuspendLayout();
+			// 
+			// btnOK
+			// 
+			this->btnOK->Location = System::Drawing::Point(12, 466);
+			this->btnOK->Name = L"btnOK";
+			this->btnOK->Size = System::Drawing::Size(112, 50);
+			this->btnOK->TabIndex = 0;
+			this->btnOK->Text = L"确定";
+			this->btnOK->UseVisualStyleBackColor = true;
+			this->btnOK->Click += gcnew System::EventHandler(this, &Main::btnOK_Click);
+			// 
+			// chkRemember
+			// 
+			this->chkRemember->AutoSize = true;
+			this->chkRemember->Location = System::Drawing::Point(69, 12);
+			this->chkRemember->Name = L"chkRemember";
+			this->chkRemember->Size = System::Drawing::Size(89, 19);
+			this->chkRemember->TabIndex = 1;
+			this->chkRemember->Text = L"记住账号";
+			this->chkRemember->UseVisualStyleBackColor = true;
+			// 
+			// txtConsole
+			// 
+			this->txtConsole->Location = System::Drawing::Point(558, 12);
+			this->txtConsole->Multiline = true;
+			this->txtConsole->Name = L"txtConsole";
+			this->txtConsole->Size = System::Drawing::Size(581, 188);
+			this->txtConsole->TabIndex = 2;
+			// 
+			// Main
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(1151, 528);
+			this->Controls->Add(this->txtConsole);
+			this->Controls->Add(this->chkRemember);
+			this->Controls->Add(this->btnOK);
+			this->Name = L"Main";
+			this->Text = L"Main";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
 		}
 #pragma endregion
+
+
+	private: System::Void btnOK_Click(System::Object^  sender, System::EventArgs^  e) {
+		txtConsole->Clear();
+		String^ content;
+
+		if (chkRemember->Checked)
+		{
+			content = "已勾选";
+		}
+		else
+		{
+			content = "未勾选";
+		}
+		txtConsole->Text = content;
+	}
 	};
 }

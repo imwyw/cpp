@@ -18,35 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CommonHelper.h" />
-    <ClInclude Include="Main.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="stdafx.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CommonHelper.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="WinFormDemo.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.h</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F6822592-05FF-4465-97F6-485CEB92A2D9}</ProjectGuid>
+    <ProjectGuid>{61BCC919-3635-4A63-8F38-7CB7004A1A83}</ProjectGuid>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>WinFormDemo</RootNamespace>
+    <RootNamespace>ChildApp</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -152,6 +128,49 @@
       <AdditionalDependencies />
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Child.cpp" />
+    <ClCompile Include="ChildApp.cpp" />
+    <ClCompile Include="CommonHelper.cpp" />
+    <ClCompile Include="DataHelper.cpp" />
+    <ClCompile Include="FrmConfig.cpp" />
+    <ClCompile Include="FrmMain.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Judger.cpp" />
+    <ClCompile Include="Task.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="Child.h" />
+    <ClInclude Include="CommonHelper.h" />
+    <ClInclude Include="DataHelper.h" />
+    <ClInclude Include="FrmConfig.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="FrmMain.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Judger.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Task.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrmConfig.resx">
+      <DependentUpon>FrmConfig.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
