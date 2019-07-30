@@ -27,8 +27,18 @@ public:
 	}
 };
 
+class Emp {
+public:
+	Person p1;
+	Person *pp;
+};
+
 int main()
 {
+	Emp e;
+	e.p1.name = "";
+	e.pp->name = "";
+
 	Student *s1 = new Student("jack", "s001");
 	Student *s2 = new Student("lucy", "s002");
 	Person* parr[] = { s1,s2 };
@@ -53,8 +63,9 @@ int main()
 	vec4->push_back(*s2);
 
 	Person* parr1 = new Person[20];
-	Person* parr2 = new Person[20]{ };
+	Person* parr2 = new Person[20]{};
 
+	Person** pparr1 = new Person*[10];
 
 
 	// ÔÝÍ£
