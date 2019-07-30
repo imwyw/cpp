@@ -295,7 +295,7 @@ namespace ChildApp {
 			this->plBlack->BackColor = System::Drawing::Color::Black;
 			this->plBlack->Location = System::Drawing::Point(1330, 218);
 			this->plBlack->Name = L"plBlack";
-			this->plBlack->Size = System::Drawing::Size(128, 112);
+			this->plBlack->Size = System::Drawing::Size(100, 100);
 			this->plBlack->TabIndex = 3;
 			// 
 			// plRed
@@ -303,7 +303,7 @@ namespace ChildApp {
 			this->plRed->BackColor = System::Drawing::Color::Red;
 			this->plRed->Location = System::Drawing::Point(1330, 369);
 			this->plRed->Name = L"plRed";
-			this->plRed->Size = System::Drawing::Size(128, 112);
+			this->plRed->Size = System::Drawing::Size(100, 100);
 			this->plRed->TabIndex = 4;
 			// 
 			// plGreen
@@ -311,7 +311,7 @@ namespace ChildApp {
 			this->plGreen->BackColor = System::Drawing::Color::Lime;
 			this->plGreen->Location = System::Drawing::Point(1330, 521);
 			this->plGreen->Name = L"plGreen";
-			this->plGreen->Size = System::Drawing::Size(128, 112);
+			this->plGreen->Size = System::Drawing::Size(100, 100);
 			this->plGreen->TabIndex = 5;
 			// 
 			// lblBlack
@@ -320,7 +320,7 @@ namespace ChildApp {
 			this->lblBlack->BackColor = System::Drawing::Color::Transparent;
 			this->lblBlack->Font = (gcnew System::Drawing::Font(L"宋体", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(134)));
-			this->lblBlack->Location = System::Drawing::Point(1387, 333);
+			this->lblBlack->Location = System::Drawing::Point(1369, 321);
 			this->lblBlack->Name = L"lblBlack";
 			this->lblBlack->Size = System::Drawing::Size(20, 20);
 			this->lblBlack->TabIndex = 6;
@@ -332,7 +332,7 @@ namespace ChildApp {
 			this->lblRed->BackColor = System::Drawing::Color::Transparent;
 			this->lblRed->Font = (gcnew System::Drawing::Font(L"宋体", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(134)));
-			this->lblRed->Location = System::Drawing::Point(1387, 484);
+			this->lblRed->Location = System::Drawing::Point(1369, 472);
 			this->lblRed->Name = L"lblRed";
 			this->lblRed->Size = System::Drawing::Size(20, 20);
 			this->lblRed->TabIndex = 7;
@@ -344,7 +344,7 @@ namespace ChildApp {
 			this->lblGreen->BackColor = System::Drawing::Color::Transparent;
 			this->lblGreen->Font = (gcnew System::Drawing::Font(L"宋体", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(134)));
-			this->lblGreen->Location = System::Drawing::Point(1387, 636);
+			this->lblGreen->Location = System::Drawing::Point(1369, 624);
 			this->lblGreen->Name = L"lblGreen";
 			this->lblGreen->Size = System::Drawing::Size(20, 20);
 			this->lblGreen->TabIndex = 8;
@@ -428,6 +428,7 @@ namespace ChildApp {
 	}
 
 	private: System::Void tsmiJudge_Click(System::Object^  sender, System::EventArgs^  e) {
+		// judger 在头文件中已声明栈对象，不需要实例化
 		int result = game->judger.AnalysisTask(game->task, game->child->balls, totalPickUpBall);
 		if (result == -1)
 		{
@@ -477,6 +478,85 @@ namespace ChildApp {
 		this->Close();
 	}
 
+			 // 鼠标按下
+	private: System::Void pbBall_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+		pbPickupBall = (PictureBox^)sender;
+		pbPickupBall->BringToFront();
+		x = e->Location.X;
+		y = e->Location.Y;
+		isMoved = true;
+	}
+
+			 // 鼠标移动
+	private: System::Void pbBall_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+		if (isMoved)
+		{
+			pbPickupBall->BringToFront();
+			int offsetX = e->Location.X - x; // x轴的偏移量
+			int offsetY = e->Location.Y - y; // y轴的偏移量
+			pbPickupBall->Top += offsetY; // 改变x轴的位置
+			pbPickupBall->Left += offsetX; // 改变y轴的位置
+		}
+	}
+
+			 // 鼠标松开
+	private: System::Void pbBall_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+		pbPickupBall->BringToFront();
+		// 拖拽到的篮子
+		Panel^ panel = nullptr;
+
+		if (isMoved &&pbPickupBall->Left >= plBlack->Left
+			&& pbPickupBall->Left <= plBlack->Left + plBlack->Width
+			&& pbPickupBall->Top >= plBlack->Top
+			&& pbPickupBall->Top <= plBlack->Top + plBlack->Height)
+		{
+			panel = plBlack;
+			lblBlack->Text = (Int32::Parse(lblBlack->Text) + 1) + "";
+		}
+		else if (isMoved &&pbPickupBall->Left >= plRed->Left
+			&& pbPickupBall->Left <= plRed->Left + plRed->Width
+			&& pbPickupBall->Top >= plRed->Top
+			&& pbPickupBall->Top <= plRed->Top + plRed->Height)
+		{
+			panel = plRed;
+			lblRed->Text = (Int32::Parse(lblRed->Text) + 1) + "";
+		}
+		else if (isMoved && pbPickupBall->Left >= plGreen->Left
+			&& pbPickupBall->Left <= plGreen->Left + plGreen->Width
+			&& pbPickupBall->Top >= plGreen->Top
+			&& pbPickupBall->Top <= plGreen->Top + plGreen->Height)
+		{
+			panel = plGreen;
+			lblGreen->Text = (Int32::Parse(lblGreen->Text) + 1) + "";
+		}
+
+		if (panel != nullptr)
+		{
+			// 拖拽至【目标Panel】中的位置
+			pbPickupBall->Location = Point(12.5, 12.5);
+			panel->Controls->Add(pbPickupBall); // 将球添加到Panel篮子中
+			pbPickupBall->BringToFront(); // 将球放到最前面
+			this->Controls->Remove(pbPickupBall); // 将球从主界面移除
+
+			// 移除主界面绑定的三个鼠标事件
+			pbPickupBall->MouseDown -= gcnew System::Windows::Forms::MouseEventHandler(this, &FrmMain::pbBall_MouseDown);
+			pbPickupBall->MouseMove -= gcnew System::Windows::Forms::MouseEventHandler(this, &FrmMain::pbBall_MouseMove);
+			pbPickupBall->MouseUp -= gcnew System::Windows::Forms::MouseEventHandler(this, &FrmMain::pbBall_MouseUp);
+
+			// 捡起当前球的索引
+			int ballIndex = Int32::Parse(pbPickupBall->Tag->ToString());
+
+			// 当前已经捡起了几个球，有可能大于目标数目
+			totalPickUpBall = Int32::Parse(lblBlack->Text) + Int32::Parse(lblRed->Text) + Int32::Parse(lblGreen->Text);
+
+			(game->child)->PickUp(game->allBalls[ballIndex], totalPickUpBall - 1);
+		}
+
+		isMoved = false;
+		pbPickupBall = nullptr;
+	}
+
+			 /*=============================界面操作==================================*/
 			 // 清空界面上的所有球 
 			 void clearBalls() {
 				 // 清空主面板上的球
@@ -532,68 +612,10 @@ namespace ChildApp {
 					 pbBall->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &FrmMain::pbBall_MouseDown);
 					 pbBall->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &FrmMain::pbBall_MouseMove);
 					 pbBall->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &FrmMain::pbBall_MouseUp);
+
 					 this->Controls->Add(pbBall);
 				 }
 			 }
 
-
-			 // 鼠标按下
-	private: System::Void pbBall_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
-		pbPickupBall = (PictureBox^)sender;
-		pbPickupBall->BringToFront();
-		x = e->Location.X;
-		y = e->Location.Y;
-		isMoved = true;
-	}
-			 // 鼠标移动
-	private: System::Void pbBall_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
-		if (isMoved)
-		{
-			pbPickupBall->BringToFront();
-			int offsetX = e->Location.X - x; // x轴的偏移量
-			int offsetY = e->Location.Y - y; // y轴的偏移量
-			pbPickupBall->Top += offsetY; // 改变x轴的位置
-			pbPickupBall->Left += offsetX; // 改变y轴的位置
-		}
-
-	}
-			 // 鼠标松开
-	private: System::Void pbBall_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
-		pbPickupBall->BringToFront();
-		Panel^ panel = nullptr;
-		if (isMoved &&pbPickupBall->Left >= plBlack->Left && pbPickupBall->Left <= plBlack->Left + plBlack->Width && pbPickupBall->Top >= plBlack->Top &&pbPickupBall->Top <= plBlack->Top + plBlack->Height)
-		{
-			panel = plBlack;
-			lblBlack->Text = (Int32::Parse(lblBlack->Text) + 1) + "";
-		}
-		else if (isMoved &&pbPickupBall->Left >= plRed->Left && pbPickupBall->Left <= plRed->Left + plRed->Width && pbPickupBall->Top >= plRed->Top &&pbPickupBall->Top <= plRed->Top + plRed->Height)
-		{
-			panel = plRed;
-			lblRed->Text = (Int32::Parse(lblRed->Text) + 1) + "";
-		}
-		else if (isMoved &&pbPickupBall->Left >= plGreen->Left && pbPickupBall->Left <= plGreen->Left + plGreen->Width && pbPickupBall->Top >= plGreen->Top &&pbPickupBall->Top <= plGreen->Top + plGreen->Height)
-		{
-			panel = plGreen;
-			lblGreen->Text = (Int32::Parse(lblGreen->Text) + 1) + "";
-		}
-
-		if (panel != nullptr)
-		{
-			pbPickupBall->Location = Point(12.5, 12.5);
-			panel->Controls->Add(pbPickupBall); // 将球添加到篮子中
-			pbPickupBall->BringToFront(); // 将球放到最前面
-			this->Controls->Remove(pbPickupBall); // 将球从容器移除
-			pbPickupBall->MouseDown -= gcnew System::Windows::Forms::MouseEventHandler(this, &FrmMain::pbBall_MouseDown);
-			pbPickupBall->MouseMove -= gcnew System::Windows::Forms::MouseEventHandler(this, &FrmMain::pbBall_MouseMove);
-			pbPickupBall->MouseUp -= gcnew System::Windows::Forms::MouseEventHandler(this, &FrmMain::pbBall_MouseUp);
-			int ballIndex = Int32::Parse(pbPickupBall->Tag->ToString());
-
-			totalPickUpBall = Int32::Parse(lblBlack->Text) + Int32::Parse(lblRed->Text) + Int32::Parse(lblGreen->Text);
-			(game->child)->PickUp(game->allBalls[ballIndex], totalPickUpBall - 1);
-		}
-
-		isMoved = false;
-		pbPickupBall = nullptr;
-	}
 	};
 }

@@ -11,10 +11,10 @@ Judger::~Judger()
 {
 }
 
-int Judger::AnalysisTask(Task task, Ball balls[], int length)
+int Judger::AnalysisTask(Task task, Ball childPickedBalls[], int totalPickUpBall)
 {
 	// 球还没捡完呢
-	if (task.blackNumber + task.redNumber + task.greenNumber > length)
+	if (task.blackNumber + task.redNumber + task.greenNumber > totalPickUpBall)
 	{
 		return -1;
 	}
@@ -22,14 +22,14 @@ int Judger::AnalysisTask(Task task, Ball balls[], int length)
 	int blackCount = 0;//黑色计数
 	int greenCount = 0;//绿色计数
 	// 遍历所有球，统计颜色
-	for (int i = 0; i < length; i++)
+	for (int i = 0; i < totalPickUpBall; i++)
 	{
 		// c_str() string->const *char,用于比较字符串是否相等
-		if (strcmp("red", balls[i].color.c_str()) == 0)
+		if (strcmp("red", childPickedBalls[i].color.c_str()) == 0)
 		{
 			redCount++;
 		}
-		else if (strcmp("green", balls[i].color.c_str()) == 0)
+		else if (strcmp("green", childPickedBalls[i].color.c_str()) == 0)
 		{
 			greenCount++;
 		}

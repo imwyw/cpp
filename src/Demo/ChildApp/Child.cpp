@@ -5,7 +5,7 @@
 Child::Child(int length)
 {
 	shouldPickUpNum = length;
-	balls = new Ball[50];
+	balls = new Ball[MAX_BALL_COUNT];
 }
 
 Child::~Child()
@@ -14,9 +14,9 @@ Child::~Child()
 	balls = nullptr;//重新指向空指针
 }
 
-// 捡球：ball是小孩捡到的球； index是捡的第几个球
 bool Child::PickUp(Ball ball, int index)
 {
+	// 将捡到的球依次添加至数组balls
 	balls[index] = ball;
 	return true;
 }

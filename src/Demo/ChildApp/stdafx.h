@@ -11,3 +11,4 @@
 #include <time.h>
 
 using namespace std;
+#define MAX_BALL_COUNT 50

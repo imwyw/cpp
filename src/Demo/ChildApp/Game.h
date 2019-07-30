@@ -12,7 +12,7 @@ public:
 	Task task;//任务
 	Child *child;//儿童
 	Judger judger;//裁判
-	Ball allBalls[50];//所有的球
+	Ball allBalls[MAX_BALL_COUNT];//所有的球
 	void StartGame(int black, int red, int green);
 };
 
