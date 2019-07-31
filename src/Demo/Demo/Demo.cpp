@@ -43,6 +43,10 @@ int main()
 	Student *s2 = new Student("lucy", "s002");
 	Person* parr[] = { s1,s2 };
 
+	Person* parr2 = new Person[2];
+	parr2[0] = *s1;
+	parr2[1] = *s2;
+
 	parr[0]->sayHi();
 	parr[1]->sayHi();
 

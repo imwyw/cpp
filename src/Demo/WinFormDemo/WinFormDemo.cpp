@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Main.h"
 #include "CommonHelper.h"
+#include "FrmZombie.h"
+#include "FrmGraphics.h"
 
 using namespace WinFormDemo;
 
@@ -12,7 +14,9 @@ int main(cli::array<System::String^>^ args) {
 	Application::SetCompatibleTextRenderingDefault(false);
 
 	//创建主窗口并运行它
-	Application::Run(gcnew Main());
+	//Application::Run(gcnew Main());
+	//Application::Run(gcnew FrmZombie());
+	Application::Run(gcnew FrmGraphics());
 	Application::Exit();
 	return 0;
 }

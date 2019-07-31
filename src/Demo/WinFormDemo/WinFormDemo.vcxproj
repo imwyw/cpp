@@ -20,6 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonHelper.h" />
+    <ClInclude Include="FrmGraphics.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="FrmZombie.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Main.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -27,6 +33,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommonHelper.cpp" />
+    <ClCompile Include="FrmGraphics.cpp" />
+    <ClCompile Include="FrmZombie.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="WinFormDemo.cpp" />
   </ItemGroup>
@@ -38,9 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmGraphics.resx">
+      <DependentUpon>FrmGraphics.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmZombie.resx">
+      <DependentUpon>FrmZombie.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Zombie.gif" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F6822592-05FF-4465-97F6-485CEB92A2D9}</ProjectGuid>
