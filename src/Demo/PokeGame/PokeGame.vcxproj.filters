@@ -18,50 +18,21 @@
     <ClInclude Include="stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CommonHelper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Main.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrmZombie.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FrmGraphics.h">
+    <ClInclude Include="GameForm.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CommonHelper.cpp">
+    <ClCompile Include="PokeGame.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="WinFormDemo.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrmZombie.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrmGraphics.cpp">
+    <ClCompile Include="GameForm.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="FrmPoke.resx">
       <Filter>资源文件</Filter>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmGraphics.resx">
-      <Filter>资源文件</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmZombie.resx">
-      <Filter>资源文件</Filter>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Zombie.gif">
-      <Filter>资源文件</Filter>
-    </Image>
   </ItemGroup>
 </Project>
