@@ -165,6 +165,11 @@ namespace LoginDemo {
 			//绑定事件 失去焦点时
 			this->txtUserName->LostFocus += gcnew System::EventHandler(this, &LoginForm::RefreshTextValue);
 			this->txtPwd->LostFocus += gcnew System::EventHandler(this, &LoginForm::RefreshTextValue);
+
+			// 播放音频资源
+			System::Media::SoundPlayer^ sp = gcnew System::Media::SoundPlayer("e:\\temp\\load.wav");
+			sp->Load();
+			sp->Play();
 		}
 
 	private:
