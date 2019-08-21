@@ -21,6 +21,7 @@ namespace WinFormDemo {
 			//
 			//TODO:  在此处添加构造函数代码
 			//
+			this->KeyPreview = true;
 		}
 
 	protected:
@@ -276,6 +277,7 @@ namespace WinFormDemo {
 			this->MaximizeBox = false;
 			this->Name = L"Main";
 			this->Text = L"Main";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Main::Main_KeyDown);
 			this->flowLayoutPanel1->ResumeLayout(false);
 			this->flowLayoutPanel1->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
@@ -330,5 +332,8 @@ namespace WinFormDemo {
 			 void refreshTime() {
 				 lblTime->Text = DateTime::Now.ToString();
 			 }
+	private: System::Void Main_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
+		MessageBox::Show(e->KeyData.ToString());
+	}
 	};
 }

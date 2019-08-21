@@ -26,6 +26,9 @@
     <ClInclude Include="FrmZombie.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="KeyForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Main.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -35,6 +38,7 @@
     <ClCompile Include="CommonHelper.cpp" />
     <ClCompile Include="FrmGraphics.cpp" />
     <ClCompile Include="FrmZombie.cpp" />
+    <ClCompile Include="KeyForm.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="WinFormDemo.cpp" />
   </ItemGroup>
@@ -51,6 +55,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmZombie.resx">
       <DependentUpon>FrmZombie.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyForm.resx">
+      <DependentUpon>KeyForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.h</DependentUpon>
