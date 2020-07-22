@@ -10,6 +10,7 @@
     - [继承中函数调用](#继承中函数调用)
     - [继承及多态、虚函数](#继承及多态虚函数)
     - [继承多态UML](#继承多态uml)
+    - [当前时间](#当前时间)
 
 <!-- /TOC -->
 
@@ -292,3 +293,23 @@ int main()
 在继承及多态（工资管理系统）实现过程中，对UML图不是很理解，自行画出UML图有困难
 
 vs提供类图
+
+
+<a id="markdown-当前时间" name="当前时间"></a>
+## 当前时间
+
+```c++
+#include <windows.h>
+#include <stdio.h>
+int main(void)
+{
+	SYSTEMTIME sys;
+	GetLocalTime(&sys);
+	printf("%4d/%02d/%02d %02d:%02d:%02d.%03d 星期%1d/n", sys.wYear, sys.wMonth, sys.wDay, sys.wHour, sys.wMinute, sys.wSecond, sys.wMilliseconds, sys.wDayOfWeek);
+	return 0;
+}
+```
+
+
+
+
