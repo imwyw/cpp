@@ -405,7 +405,7 @@ namespace ChildApp {
 			long seed = (long)time(NULL);
 			srand((int)seed);
 
-			// 此处有变动，每个颜色最多5个
+			// 此处有变动，每个颜色最多4个
 			r = rand() % 5;
 			g = rand() % 5;
 			b = rand() % 5;
