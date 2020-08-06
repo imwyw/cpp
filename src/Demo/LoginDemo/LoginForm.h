@@ -1,7 +1,6 @@
 #pragma once
 #include "stdafx.h"
 #include "MainForm.h"
-#include "KeyTestForm.h"
 #include "PersistenceForm.h"
 #include "Student.h"
 #include "CommonHelper.h"
@@ -44,7 +43,7 @@ namespace LoginDemo {
 	private: System::Windows::Forms::Button^  btnLogin;
 	private: System::Windows::Forms::TextBox^  txtUserName;
 	private: System::Windows::Forms::TextBox^  txtPwd;
-	private: System::Windows::Forms::Button^  btnArrow;
+
 	private: System::Windows::Forms::Button^  btnCancel;
 	private: System::Windows::Forms::Button^  btnPersistence;
 
@@ -66,16 +65,16 @@ namespace LoginDemo {
 			this->btnLogin = (gcnew System::Windows::Forms::Button());
 			this->txtUserName = (gcnew System::Windows::Forms::TextBox());
 			this->txtPwd = (gcnew System::Windows::Forms::TextBox());
-			this->btnArrow = (gcnew System::Windows::Forms::Button());
 			this->btnCancel = (gcnew System::Windows::Forms::Button());
 			this->btnPersistence = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// btnLogin
 			// 
-			this->btnLogin->Location = System::Drawing::Point(131, 181);
+			this->btnLogin->Location = System::Drawing::Point(175, 226);
+			this->btnLogin->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->btnLogin->Name = L"btnLogin";
-			this->btnLogin->Size = System::Drawing::Size(75, 23);
+			this->btnLogin->Size = System::Drawing::Size(100, 29);
 			this->btnLogin->TabIndex = 0;
 			this->btnLogin->Text = L"登录";
 			this->btnLogin->UseVisualStyleBackColor = true;
@@ -83,33 +82,26 @@ namespace LoginDemo {
 			// 
 			// txtUserName
 			// 
-			this->txtUserName->Location = System::Drawing::Point(131, 38);
+			this->txtUserName->Location = System::Drawing::Point(175, 48);
+			this->txtUserName->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->txtUserName->Name = L"txtUserName";
-			this->txtUserName->Size = System::Drawing::Size(195, 21);
+			this->txtUserName->Size = System::Drawing::Size(259, 25);
 			this->txtUserName->TabIndex = 1;
 			// 
 			// txtPwd
 			// 
-			this->txtPwd->Location = System::Drawing::Point(131, 106);
+			this->txtPwd->Location = System::Drawing::Point(175, 132);
+			this->txtPwd->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->txtPwd->Name = L"txtPwd";
-			this->txtPwd->Size = System::Drawing::Size(195, 21);
+			this->txtPwd->Size = System::Drawing::Size(259, 25);
 			this->txtPwd->TabIndex = 2;
-			// 
-			// btnArrow
-			// 
-			this->btnArrow->Location = System::Drawing::Point(12, 251);
-			this->btnArrow->Name = L"btnArrow";
-			this->btnArrow->Size = System::Drawing::Size(75, 23);
-			this->btnArrow->TabIndex = 3;
-			this->btnArrow->Text = L"方向键测试";
-			this->btnArrow->UseVisualStyleBackColor = true;
-			this->btnArrow->Click += gcnew System::EventHandler(this, &LoginForm::btnArrow_Click);
 			// 
 			// btnCancel
 			// 
-			this->btnCancel->Location = System::Drawing::Point(224, 181);
+			this->btnCancel->Location = System::Drawing::Point(299, 226);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->btnCancel->Name = L"btnCancel";
-			this->btnCancel->Size = System::Drawing::Size(75, 23);
+			this->btnCancel->Size = System::Drawing::Size(100, 29);
 			this->btnCancel->TabIndex = 4;
 			this->btnCancel->Text = L"取消";
 			this->btnCancel->UseVisualStyleBackColor = true;
@@ -117,9 +109,10 @@ namespace LoginDemo {
 			// 
 			// btnPersistence
 			// 
-			this->btnPersistence->Location = System::Drawing::Point(93, 251);
+			this->btnPersistence->Location = System::Drawing::Point(13, 316);
+			this->btnPersistence->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->btnPersistence->Name = L"btnPersistence";
-			this->btnPersistence->Size = System::Drawing::Size(75, 23);
+			this->btnPersistence->Size = System::Drawing::Size(100, 29);
 			this->btnPersistence->TabIndex = 5;
 			this->btnPersistence->Text = L"持久化";
 			this->btnPersistence->UseVisualStyleBackColor = true;
@@ -127,16 +120,16 @@ namespace LoginDemo {
 			// 
 			// LoginForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(449, 286);
+			this->ClientSize = System::Drawing::Size(599, 358);
 			this->ControlBox = false;
 			this->Controls->Add(this->btnPersistence);
 			this->Controls->Add(this->btnCancel);
-			this->Controls->Add(this->btnArrow);
 			this->Controls->Add(this->txtPwd);
 			this->Controls->Add(this->txtUserName);
 			this->Controls->Add(this->btnLogin);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"LoginForm";
 			this->Text = L"登录";
 			this->Load += gcnew System::EventHandler(this, &LoginForm::LoginForm_Load);
@@ -167,7 +160,8 @@ namespace LoginDemo {
 			this->txtPwd->LostFocus += gcnew System::EventHandler(this, &LoginForm::RefreshTextValue);
 
 			// 播放音频资源
-			System::Media::SoundPlayer^ sp = gcnew System::Media::SoundPlayer("e:\\temp\\load.wav");
+			String^ path = System::AppDomain::CurrentDomain->BaseDirectory;
+			System::Media::SoundPlayer^ sp = gcnew System::Media::SoundPlayer(path+"..\\LoginDemo\\后会无期.wav");
 			sp->Load();
 			sp->Play();
 		}
@@ -224,11 +218,6 @@ namespace LoginDemo {
 			this->Show();
 		}
 
-	private:
-		System::Void btnArrow_Click(System::Object^  sender, System::EventArgs^  e) {
-			KeyTestForm^ frm = gcnew KeyTestForm();
-			frm->ShowDialog();
-		}
 	private:
 		System::Void btnCancel_Click(System::Object^  sender, System::EventArgs^  e) {
 			Application::Exit();

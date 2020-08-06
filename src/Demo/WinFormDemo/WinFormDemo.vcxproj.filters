@@ -30,7 +30,10 @@
     <ClInclude Include="FrmGraphics.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="KeyForm.h">
+    <ClInclude Include="NavForm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyTestForm.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,7 +53,10 @@
     <ClCompile Include="FrmGraphics.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="KeyForm.cpp">
+    <ClCompile Include="NavForm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyTestForm.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,6 +68,9 @@
       <Filter>资源文件</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmZombie.resx">
+      <Filter>资源文件</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyForm.resx">
       <Filter>资源文件</Filter>
     </EmbeddedResource>
   </ItemGroup>

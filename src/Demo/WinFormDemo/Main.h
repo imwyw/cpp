@@ -101,11 +101,11 @@ namespace WinFormDemo {
 			// 
 			// btnOK
 			// 
-			this->btnOK->Location = System::Drawing::Point(12, 466);
+			this->btnOK->Location = System::Drawing::Point(69, 240);
 			this->btnOK->Name = L"btnOK";
 			this->btnOK->Size = System::Drawing::Size(112, 50);
 			this->btnOK->TabIndex = 0;
-			this->btnOK->Text = L"确定";
+			this->btnOK->Text = L"确定取值";
 			this->btnOK->UseVisualStyleBackColor = true;
 			this->btnOK->Click += gcnew System::EventHandler(this, &Main::btnOK_Click);
 			// 

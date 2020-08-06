@@ -30,9 +30,6 @@
     <ClInclude Include="CommonHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="KeyTestForm.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="PersistenceForm.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -53,9 +50,6 @@
     <ClCompile Include="CommonHelper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="KeyTestForm.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="PersistenceForm.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -65,5 +59,18 @@
     <ClCompile Include="Book.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="KeyTestForm.resx">
+      <Filter>资源文件</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <Filter>资源文件</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="后会无期.wav">
+      <Filter>资源文件</Filter>
+    </Media>
   </ItemGroup>
 </Project>

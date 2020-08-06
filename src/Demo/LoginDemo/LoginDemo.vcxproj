@@ -131,9 +131,6 @@
   <ItemGroup>
     <ClInclude Include="Book.h" />
     <ClInclude Include="CommonHelper.h" />
-    <ClInclude Include="KeyTestForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="LoginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -149,7 +146,6 @@
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="CommonHelper.cpp" />
-    <ClCompile Include="KeyTestForm.cpp" />
     <ClCompile Include="LoginDemo.cpp" />
     <ClCompile Include="LoginForm.cpp" />
     <ClCompile Include="MainForm.cpp" />
@@ -164,12 +160,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="KeyTestForm.resx">
-      <DependentUpon>KeyTestForm.h</DependentUpon>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="后会无期.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

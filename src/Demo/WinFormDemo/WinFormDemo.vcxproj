@@ -26,10 +26,13 @@
     <ClInclude Include="FrmZombie.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="KeyForm.h">
+    <ClInclude Include="KeyTestForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Main.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="NavForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
@@ -38,8 +41,9 @@
     <ClCompile Include="CommonHelper.cpp" />
     <ClCompile Include="FrmGraphics.cpp" />
     <ClCompile Include="FrmZombie.cpp" />
-    <ClCompile Include="KeyForm.cpp" />
+    <ClCompile Include="KeyTestForm.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NavForm.cpp" />
     <ClCompile Include="WinFormDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -56,11 +60,14 @@
     <EmbeddedResource Include="FrmZombie.resx">
       <DependentUpon>FrmZombie.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KeyForm.resx">
-      <DependentUpon>KeyForm.h</DependentUpon>
+    <EmbeddedResource Include="KeyTestForm.resx">
+      <DependentUpon>KeyTestForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NavForm.resx">
+      <DependentUpon>NavForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
